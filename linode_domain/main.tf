@@ -1,5 +1,5 @@
 resource "linode_domain" "domains" {
-  for_each = domains
+  for_each = { for d in var.domains : replace(lower(d.domain), ".", "_") => d }
 
   domain      = each.value.domain
   soa_email   = each.value.soa_email
@@ -10,6 +10,8 @@ resource "linode_domain" "domains" {
   retry_sec   = each.value.retry_sec
   expire_sec  = each.value.expire_sec
   refresh_sec = each.value.refresh_sec
+  axfr_ips    = []
+  type        = "master"
 
   # axfr_ips is not supported
   axfr_ips = []
