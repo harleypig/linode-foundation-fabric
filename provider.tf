@@ -5,5 +5,3 @@ terraform {
     }
   }
 }
-
-#provider "linode" { config_profile = "harleypig" }
