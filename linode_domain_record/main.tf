@@ -1,10 +1,7 @@
-locals {
-  records = { for r in var.records : r["record_index"] => r }
-}
-
 resource "linode_domain_record" "domain_records" {
-  for_each = local.records
+  for_each = var.records
 
+  #??? domain_id   = module.domains.linode_domain.domains[each.value.domain_index].id
   domain_id   = linode_domain.domains[each.value.domain_index].id
   record_type = each.value.record_type
   target      = each.value.target

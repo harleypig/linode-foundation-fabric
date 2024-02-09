@@ -1,15 +1,14 @@
 variable "domains" {
   description = "Domain data."
-  type = list(object({
+  type = map(object({
     domain      = string
     soa_email   = string
-    tags        = list(string)
     description = optional(string)
-    group       = optional(string)
-    ttl_sec     = optional(number)
-    retry_sec   = optional(number)
     expire_sec  = optional(number)
+    group       = optional(string)
     refresh_sec = optional(number)
-    type        = string
+    retry_sec   = optional(number)
+    tags        = optional(list(string))
+    ttl_sec     = optional(number)
   }))
 }
