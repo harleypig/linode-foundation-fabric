@@ -1,4 +1,4 @@
 variable "domains" {
   description = "Domain data."
-  type        = list(map(any))
+  type        = list(any)
 }
