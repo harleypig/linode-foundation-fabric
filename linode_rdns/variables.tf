@@ -1,4 +1,8 @@
 variable "rdns" {
   description = "Reverse DNS entries"
-  type        = list(any)
+  type = map(object({
+    address = string
+    rdns    = string
+    wait    = optional(bool)
+  }))
 }
