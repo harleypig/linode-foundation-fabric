@@ -10,5 +10,6 @@ variable "domains" {
     retry_sec   = optional(number)
     tags        = optional(list(string))
     ttl_sec     = optional(number)
+    status      = optional(string) # Optional status field for domain rendering
   }))
 }

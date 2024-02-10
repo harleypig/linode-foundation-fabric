@@ -16,4 +16,7 @@ resource "linode_domain" "domains" {
 
   # "slave" is not supported for type
   type = "master"
+
+  # Optional status field to control the rendering of the domain
+  status = each.value.status
 }
