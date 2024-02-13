@@ -1,7 +1,7 @@
 variable "records" {
   description = "DNS records"
   type = map(object({
-    domain_index = string
+    domain_id = number
     record_type  = string
     target       = string
     name         = optional(string)
