@@ -13,4 +13,11 @@ variable "records" {
     port        = optional(number)
     weight      = optional(number)
   }))
+
+  validation {
+    condition     = alltrue([
+      for _, record in var.records : record.record_type != "SRV" || record.name == null
+    ])
+    error_message = "The name field must not be set when the record_type is 'SRV'."
+  }
 }
