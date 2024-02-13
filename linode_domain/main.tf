@@ -6,10 +6,10 @@ resource "linode_domain" "domains" {
   tags        = each.value.tags
   description = each.value.description
   group       = each.value.group
-  ttl_sec     = try(each.value.ttl_sec, 0)
-  retry_sec   = try(each.value.retry_sec, 0)
-  expire_sec  = try(each.value.expire_sec, 0)
-  refresh_sec = try(each.value.refresh_sec, 0)
+  ttl_sec     = each.value.ttl_sec
+  retry_sec   = each.value.retry_sec
+  expire_sec  = each.value.expire_sec
+  refresh_sec = each.value.refresh_sec
 
   # axfr_ips is not supported
   axfr_ips = []
