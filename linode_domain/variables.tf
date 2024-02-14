@@ -2,16 +2,17 @@ variable "domains" {
   description = "Domain data."
 
   type = map(object({
-    description = optional(string)
     domain      = string
-    expire_sec  = number
-    group       = optional(string)
-    refresh_sec = number
-    retry_sec   = number
     soa_email   = string
+
+    description = optional(string)
+    expire_sec  = optional(number)
+    group       = optional(string)
+    refresh_sec = optional(number)
+    retry_sec   = optional(number)
     status      = optional(string)
     tags        = optional(list(string))
-    ttl_sec     = number
+    ttl_sec     = optional(number)
   }))
 
   validation {
