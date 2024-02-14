@@ -23,16 +23,16 @@ variable "records" {
 
   validation {
     condition     = alltrue([
-      for obj in var.records : obj.record_type != "SRV" || (obj.record_type == "SRV" && obj.protocol != null)
+      for obj in var.records : obj.record_type != "SRV" || (obj.record_type == "SRV" && obj.protocol != null) || obj.protocol == null
     ])
-    error_message = "The protocol field must not be null when the record_type is 'SRV'."
+    error_message = "The protocol field must be set only when the record_type is 'SRV'."
   }
 
   validation {
     condition     = alltrue([
-      for obj in var.records : obj.record_type != "SRV" || (obj.record_type == "SRV" && obj.service != null)
+      for obj in var.records : obj.record_type != "SRV" || (obj.record_type == "SRV" && obj.service != null) || obj.service == null
     ])
-    error_message = "The service field must not be null when the record_type is 'SRV'."
+    error_message = "The service field must be set only when the record_type is 'SRV'."
   }
 
   validation {
