@@ -16,9 +16,9 @@ variable "records" {
 
   validation {
     condition     = alltrue([
-      for obj in var.records : obj.record_type != "SRV" || (obj.record_type == "SRV" && obj.name != null)
+      for obj in var.records : obj.record_type != "SRV" || (obj.record_type == "SRV" && obj.name == null)
     ])
-    error_message = "The name field must be set when the record_type is 'SRV'."
+    error_message = "The name field must be null when the record_type is 'SRV'."
   }
   #validation {
   #  condition     = alltrue([
