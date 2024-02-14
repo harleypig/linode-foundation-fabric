@@ -12,7 +12,7 @@ variable "domains" {
     retry_sec   = optional(number)
     status      = optional(string)
     tags        = optional(list(string))
-    ttl_sec     = optional(number, description = "The Time To Live (TTL) for the domain, in seconds. Valid values are 0, 30, 120, 300, 3600, 7200, 14400, 28800, 57600, 86400, 172800, 345600, 604800, 1209600, 2419200.")
+    ttl_sec     = optional(number)
   }))
 
   validation {
