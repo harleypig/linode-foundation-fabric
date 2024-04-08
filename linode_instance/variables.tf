@@ -1,7 +1,6 @@
 variable "instance_label" {
   description = "The label of the Linode instance."
   type        = string
-  default     = "harleydev"
 }
 
 variable "instance_region" {
@@ -13,13 +12,11 @@ variable "instance_region" {
 variable "instance_type" {
   description = "The type of the Linode instance."
   type        = string
-  default     = "g6-standard-4"
 }
 
 variable "instance_group" {
   description = "The group of the Linode instance."
   type        = string
-  default     = "harley"
 }
 
 variable "backups_enabled" {
