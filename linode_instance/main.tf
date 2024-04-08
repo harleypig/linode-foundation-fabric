@@ -1,20 +1,46 @@
-resource "linode_instance_disk" "site_disk_swap" {
-  filesystem = "swap"
-  label      = "512 MB Swap Image"
-  linode_id  = linode_instance.site.id
-  size       = 512
-}
+resource "linode_instance" "site" {
+  label = "harleydev"
+  #image  = "linode/arch"
+  region = "us-central"
+  type   = "g6-standard-4"
+  group  = "harley"
+  #migration_type = "cold"
+  #resize_disk    = false
 
-resource "linode_instance_disk" "site_disk" {
-  filesystem = "ext4"
-  label      = "Arch Linux Disk"
-  linode_id  = linode_instance.site.id
-  size       = 163328
+  # XXX: This needs to be parameterized (harleydev shouldn't be backed up).
+  backups_enabled = false
+
+  # XXX: Can I control this via terraform?
+  #  backups = [
+  #    {
+  #      available = true
+  #      enabled   = true
+  #      schedule = [
+  #        {
+  #          day    = "Sunday"
+  #          window = "W10"
+  #        },
+  #      ]
+  #    },
+  #  ]
+
+  alerts {
+    cpu            = 96
+    io             = 4500
+    network_in     = 15
+    network_out    = 15
+    transfer_quota = 80
+  }
+
+  # XXX: parameterize
+  tags = [
+    "dev",
+  ]
 }
 
 resource "linode_instance_config" "site_config" {
-  booted       = false
-  comments     = null
+  #booted       = false
+  #comments     = null
   kernel       = "linode/grub2"
   label        = "My Arch Linux Profile"
   linode_id    = linode_instance.site.id
@@ -44,42 +70,16 @@ resource "linode_instance_config" "site_config" {
   }
 }
 
-resource "linode_instance" "site" {
-  label = "harleypig"
-  #image  = "linode/arch"
-  region = "us-central"
-  type   = "g6-standard-4"
-  group  = "harley"
-  #migration_type = "cold"
-  #resize_disk    = false
+resource "linode_instance_disk" "site_disk_swap" {
+  filesystem = "swap"
+  label      = "512 MB Swap Image"
+  linode_id  = linode_instance.site.id
+  size       = 512
+}
 
-  # XXX: This needs to be parameterized (harleydev shouldn't be backed up).
-  backups_enabled = true
-
-  # XXX: Can I control this via terraform?
-  #  backups = [
-  #    {
-  #      available = true
-  #      enabled   = true
-  #      schedule = [
-  #        {
-  #          day    = "Sunday"
-  #          window = "W10"
-  #        },
-  #      ]
-  #    },
-  #  ]
-
-  alerts {
-    cpu            = 96
-    io             = 4500
-    network_in     = 15
-    network_out    = 15
-    transfer_quota = 80
-  }
-
-  # XXX: parameterize
-  tags = [
-    "prod",
-  ]
+resource "linode_instance_disk" "site_disk" {
+  filesystem = "ext4"
+  label      = "Arch Linux Disk"
+  linode_id  = linode_instance.site.id
+  size       = 163328
 }
