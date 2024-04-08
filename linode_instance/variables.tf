@@ -1,103 +1,103 @@
-variable "region" {
+variable "image" {
   description = "The region where the Linode instance is deployed."
   type        = string
   default     = "us-central"
 }
 
-variable "label" {
+variable "region" {
   description = "The label of the Linode instance."
   type        = string
 }
 
-variable "type" {
+variable "label" {
   description = "The type of the Linode instance."
   type        = string
 }
 
-variable "group" {
+variable "type" {
   description = "The group of the Linode instance."
   type        = string
 }
 
-variable "backups" {
+variable "group" {
   description = "Flag to enable backups for the Linode instance."
   type        = bool
   default     = false
 }
 
-variable "cpu_alert_threshold" {
+variable "backups" {
   description = "CPU usage alert threshold."
   type        = number
   default     = 96
 }
 
-variable "io_alert_threshold" {
+variable "root_pass" {
   description = "IO usage alert threshold."
   type        = number
   default     = 4500
 }
 
-variable "network_in_alert_threshold" {
+variable "authorized_keys" {
   description = "Incoming network traffic alert threshold."
   type        = number
   default     = 15
 }
 
-variable "network_out_alert_threshold" {
+variable "swap_size" {
   description = "Outgoing network traffic alert threshold."
   type        = number
   default     = 15
 }
 
-variable "transfer_quota_alert_threshold" {
+variable "private_ip" {
   description = "Transfer quota alert threshold."
   type        = number
   default     = 80
 }
 
-variable "tags" {
+variable "watchdog_enabled" {
   description = "Tags associated with the Linode instance."
   type        = list(string)
   default     = ["dev"]
 }
 
-variable "image" {
+variable "booted" {
   description = "An Image ID to deploy the Disk from."
   type        = string
   default     = "linode/ubuntu22.04"
 }
 
-variable "root_pass" {
+variable "tags" {
   description = "The initial password for the root user account."
   type        = string
   default     = "a-strong-password"
 }
 
-variable "authorized_keys" {
+variable "cpu_alert_threshold" {
   description = "A list of SSH public keys to deploy for the root user."
   type        = list(string)
   default     = []
 }
 
-variable "swap_size" {
+variable "io_alert_threshold" {
   description = "The swap disk size for the newly-created Linode."
   type        = number
   default     = 512
 }
 
-variable "private_ip" {
+variable "network_in_alert_threshold" {
   description = "If true, the created Linode will have private networking enabled."
   type        = bool
   default     = false
 }
 
-variable "watchdog_enabled" {
+variable "network_out_alert_threshold" {
   description = "If true, the Linode's Shutdown Watchdog (Lassie) is enabled."
   type        = bool
   default     = true
 }
 
-variable "booted" {
+variable "transfer_quota_alert_threshold" {
   description = "If true, then the instance is kept or converted into a running state."
   type        = bool
   default     = true
