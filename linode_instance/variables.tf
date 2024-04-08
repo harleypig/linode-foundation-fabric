@@ -1,12 +1,12 @@
-variable "label" {
-  description = "The label of the Linode instance."
-  type        = string
-}
-
 variable "region" {
   description = "The region where the Linode instance is deployed."
   type        = string
   default     = "us-central"
+}
+
+variable "label" {
+  description = "The label of the Linode instance."
+  type        = string
 }
 
 variable "type" {
