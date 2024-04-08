@@ -1,61 +1,61 @@
-variable "instance_label" {
+variable "label" {
   description = "The label of the Linode instance."
   type        = string
 }
 
-variable "instance_region" {
+variable "region" {
   description = "The region where the Linode instance is deployed."
   type        = string
   default     = "us-central"
 }
 
-variable "instance_type" {
+variable "type" {
   description = "The type of the Linode instance."
   type        = string
 }
 
-variable "instance_group" {
+variable "group" {
   description = "The group of the Linode instance."
   type        = string
 }
 
-variable "backups_enabled" {
+variable "backups" {
   description = "Flag to enable backups for the Linode instance."
   type        = bool
   default     = false
 }
 
-variable "alert_cpu" {
+variable "cpu_alert_threshold" {
   description = "CPU usage alert threshold."
   type        = number
   default     = 96
 }
 
-variable "alert_io" {
+variable "io_alert_threshold" {
   description = "IO usage alert threshold."
   type        = number
   default     = 4500
 }
 
-variable "alert_network_in" {
+variable "network_in_alert_threshold" {
   description = "Incoming network traffic alert threshold."
   type        = number
   default     = 15
 }
 
-variable "alert_network_out" {
+variable "network_out_alert_threshold" {
   description = "Outgoing network traffic alert threshold."
   type        = number
   default     = 15
 }
 
-variable "alert_transfer_quota" {
+variable "transfer_quota_alert_threshold" {
   description = "Transfer quota alert threshold."
   type        = number
   default     = 80
 }
 
-variable "instance_tags" {
+variable "tags" {
   description = "Tags associated with the Linode instance."
   type        = list(string)
   default     = ["dev"]
@@ -103,31 +103,31 @@ variable "booted" {
   default     = true
 }
 
-variable "migration_type" {
+variable "migration" {
   description = "The type of migration to use when updating the type or region of a Linode."
   type        = string
   default     = "cold"
 }
 
-variable "firewall_id" {
+variable "firewall" {
   description = "The ID of the Firewall to attach to the instance upon creation."
   type        = number
   default     = null
 }
 
-variable "stackscript_id" {
+variable "stackscript" {
   description = "The StackScript to deploy to the newly created Linode."
   type        = number
   default     = null
 }
 
-variable "stackscript_data" {
+variable "stackscript_config" {
   description = "An object containing responses to any User Defined Fields present in the StackScript being deployed to this Linode."
   type        = map(string)
   default     = {}
 }
 
-variable "interfaces" {
+variable "network_interfaces" {
   description = "A list of network interfaces to be assigned to the Linode on creation."
   type        = list(map(any))
   default     = []
