@@ -1,134 +1,62 @@
-variable "image" {
-  description = "The region where the Linode instance is deployed."
-  type        = string
-  default     = "us-central"
-}
-
-variable "region" {
+variable "label" {
   description = "The label of the Linode instance."
   type        = string
 }
 
-variable "label" {
-  description = "The type of the Linode instance."
+variable "region" {
+  description = "The region where the Linode instance will be created."
   type        = string
 }
 
 variable "type" {
-  description = "The group of the Linode instance."
+  description = "The type of the Linode instance (determines the pricing and specifications)."
   type        = string
 }
 
 variable "group" {
-  description = "Flag to enable backups for the Linode instance."
+  description = "The group this Linode instance will be assigned to."
+  type        = string
+  default     = ""
+}
+
+variable "backups" {
+  description = "If this Linode instance should have backups enabled."
   type        = bool
   default     = false
 }
 
-variable "backups" {
+variable "cpu_alert_threshold" {
   description = "CPU usage alert threshold."
   type        = number
-  default     = 96
+  default     = 90
 }
 
-variable "root_pass" {
+variable "io_alert_threshold" {
   description = "IO usage alert threshold."
   type        = number
-  default     = 4500
+  default     = 10000
 }
 
-variable "authorized_keys" {
-  description = "Incoming network traffic alert threshold."
+variable "network_in_alert_threshold" {
+  description = "Incoming traffic alert threshold in Mbps."
   type        = number
-  default     = 15
+  default     = 10
 }
 
-variable "swap_size" {
-  description = "Outgoing network traffic alert threshold."
+variable "network_out_alert_threshold" {
+  description = "Outgoing traffic alert threshold in Mbps."
   type        = number
-  default     = 15
+  default     = 10
 }
 
-variable "private_ip" {
-  description = "Transfer quota alert threshold."
+variable "transfer_quota_alert_threshold" {
+  description = "Transfer quota alert threshold in percentage."
   type        = number
   default     = 80
 }
 
-variable "watchdog_enabled" {
-  description = "Tags associated with the Linode instance."
-  type        = list(string)
-  default     = ["dev"]
-}
-
-variable "booted" {
-  description = "An Image ID to deploy the Disk from."
-  type        = string
-  default     = "linode/ubuntu22.04"
-}
-
 variable "tags" {
-  description = "The initial password for the root user account."
-  type        = string
-  default     = "a-strong-password"
-}
-
-variable "cpu_alert_threshold" {
-  description = "A list of SSH public keys to deploy for the root user."
+  description = "A list of tags to apply to the Linode instance."
   type        = list(string)
-  default     = []
-}
-
-variable "io_alert_threshold" {
-  description = "The swap disk size for the newly-created Linode."
-  type        = number
-  default     = 512
-}
-
-variable "network_in_alert_threshold" {
-  description = "If true, the created Linode will have private networking enabled."
-  type        = bool
-  default     = false
-}
-
-variable "network_out_alert_threshold" {
-  description = "If true, the Linode's Shutdown Watchdog (Lassie) is enabled."
-  type        = bool
-  default     = true
-}
-
-variable "transfer_quota_alert_threshold" {
-  description = "If true, then the instance is kept or converted into a running state."
-  type        = bool
-  default     = true
-}
-
-variable "migration" {
-  description = "The type of migration to use when updating the type or region of a Linode."
-  type        = string
-  default     = "cold"
-}
-
-variable "firewall" {
-  description = "The ID of the Firewall to attach to the instance upon creation."
-  type        = number
-  default     = null
-}
-
-variable "stackscript" {
-  description = "The StackScript to deploy to the newly created Linode."
-  type        = number
-  default     = null
-}
-
-variable "stackscript_config" {
-  description = "An object containing responses to any User Defined Fields present in the StackScript being deployed to this Linode."
-  type        = map(string)
-  default     = {}
-}
-
-variable "network_interfaces" {
-  description = "A list of network interfaces to be assigned to the Linode on creation."
-  type        = list(map(any))
   default     = []
 }
