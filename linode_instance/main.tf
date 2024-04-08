@@ -1,13 +1,13 @@
 resource "linode_instance" "site" {
-  label = var.instance_label
+  label = var.label
   #image  = "linode/arch"
-  region = var.instance_region
-  type   = var.instance_type
-  group  = var.instance_group
+  region = var.region
+  type   = var.type
+  group  = var.group
   #migration_type = "cold"
   #resize_disk    = false
 
-  backups_enabled = var.backups_enabled
+  backups_enabled = var.backups
 
   # XXX: Can I control this via terraform?
   #  backups = [
@@ -23,15 +23,15 @@ resource "linode_instance" "site" {
   #    },
   #  ]
 
-  alerts {
-    cpu            = var.alert_cpu
-    io             = var.alert_io
-    network_in     = var.alert_network_in
-    network_out    = var.alert_network_out
-    transfer_quota = var.alert_transfer_quota
+  alert {
+    cpu            = var.cpu_alert_threshold
+    io             = var.io_alert_threshold
+    network_in     = var.network_in_alert_threshold
+    network_out    = var.network_out_alert_threshold
+    transfer_quota = var.transfer_quota_alert_threshold
   }
 
-  tags = var.instance_tags
+  tags = var.tags
 }
 
 #resource "linode_instance_config" "site_config" {
