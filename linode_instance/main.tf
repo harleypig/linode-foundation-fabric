@@ -3,7 +3,6 @@ resource "linode_instance" "site" {
   #image  = "linode/arch"
   region = var.region
   type   = var.type
-  group  = var.group
   #migration_type = "cold"
   #resize_disk    = false
 
@@ -23,13 +22,14 @@ resource "linode_instance" "site" {
   #    },
   #  ]
 
-  alert {
-    cpu            = var.cpu_alert_threshold
-    io             = var.io_alert_threshold
-    network_in     = var.network_in_alert_threshold
-    network_out    = var.network_out_alert_threshold
-    transfer_quota = var.transfer_quota_alert_threshold
-  }
+  #alert {
+  #  cpu            = var.cpu_alert_threshold
+  #  io             = var.io_alert_threshold
+  #  network_in     = var.network_in_alert_threshold
+  #  network_out    = var.network_out_alert_threshold
+  #  transfer_quota = var.transfer_quota_alert_threshold
+  #}
+  alert = var.alert
 
   tags = var.tags
 }

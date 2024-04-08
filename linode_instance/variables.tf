@@ -78,11 +78,6 @@ variable "booted" {
   type        = bool
   default     = true
 }
-variable "image" {
-  description = "The image to use for the Linode instance."
-  type        = string
-  default     = "linode/arch"
-}
 
 variable "migration_type" {
   description = "The type of migration ('live' or 'cold') that will occur when the Linode instance is resized."
@@ -90,22 +85,22 @@ variable "migration_type" {
   default     = "cold"
 }
 
-variable "resize_disk" {
-  description = "If true, changes in Linode type will attempt to upsize or downsize implicitly created disks."
-  type        = bool
-  default     = false
+# Simplified Resource Arguments
+
+variable "backup_id" {
+  description = "A Backup ID from another Linode's available backups."
+  type        = number
+  default = null
 }
 
-variable "backups_schedule_day" {
-  description = "The day of the week that the Linode's backups will be taken."
+variable "image" {
+  description = "The image to use for the Linode instance."
   type        = string
-  default     = "Sunday"
 }
 
-variable "backups_schedule_window" {
-  description = "The time window ('W0'-'W22') in which the Linode's backups will be taken."
+variable "root_pass" {
+  description = "The initial password for the root user account."
   type        = string
-  default     = "W10"
 }
 
 variable "kernel" {
