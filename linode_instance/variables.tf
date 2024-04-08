@@ -78,3 +78,74 @@ variable "booted" {
   type        = bool
   default     = true
 }
+variable "image" {
+  description = "The image to use for the Linode instance."
+  type        = string
+  default     = "linode/arch"
+}
+
+variable "migration_type" {
+  description = "The type of migration ('live' or 'cold') that will occur when the Linode instance is resized."
+  type        = string
+  default     = "cold"
+}
+
+variable "resize_disk" {
+  description = "If true, changes in Linode type will attempt to upsize or downsize implicitly created disks."
+  type        = bool
+  default     = false
+}
+
+variable "backups_schedule_day" {
+  description = "The day of the week that the Linode's backups will be taken."
+  type        = string
+  default     = "Sunday"
+}
+
+variable "backups_schedule_window" {
+  description = "The time window ('W0'-'W22') in which the Linode's backups will be taken."
+  type        = string
+  default     = "W10"
+}
+
+variable "kernel" {
+  description = "The kernel to use for the Linode instance."
+  type        = string
+  default     = "linode/grub2"
+}
+
+variable "memory_limit" {
+  description = "The memory limit of the Linode instance in MB. Set to 0 for no limit."
+  type        = number
+  default     = 0
+}
+
+variable "root_device" {
+  description = "The root device to use for booting the Linode instance."
+  type        = string
+  default     = "/dev/sda"
+}
+
+variable "run_level" {
+  description = "The run level ('default', 'single', 'binbash') to boot the Linode instance into."
+  type        = string
+  default     = "default"
+}
+
+variable "virt_mode" {
+  description = "The virtualization mode ('fullvirt' or 'paravirt') to use for the Linode instance."
+  type        = string
+  default     = "paravirt"
+}
+
+variable "helpers" {
+  description = "A map of helper settings to use for the Linode instance."
+  type        = map(bool)
+  default     = {
+    devtmpfs_automount = true
+    distro             = true
+    modules_dep        = true
+    network            = true
+    updatedb_disabled  = true
+  }
+}
