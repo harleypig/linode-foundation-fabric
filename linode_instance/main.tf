@@ -7,7 +7,6 @@ resource "linode_instance" "site" {
   #migration_type = "cold"
   #resize_disk    = false
 
-  # XXX: This needs to be parameterized (harleydev shouldn't be backed up).
   backups_enabled = var.backups_enabled
 
   # XXX: Can I control this via terraform?
@@ -32,53 +31,51 @@ resource "linode_instance" "site" {
     transfer_quota = var.alert_transfer_quota
   }
 
-  # XXX: parameterize
   tags = var.instance_tags
 }
 
-resource "linode_instance_config" "site_config" {
-  #booted       = false
-  #comments     = null
-resource "linode_instance_config" "site_config" {
-  kernel       = "linode/grub2"
-  label        = "My Arch Linux Profile"
-  linode_id    = linode_instance.site.id
-  memory_limit = 0
-  root_device  = "/dev/sda"
-  run_level    = "default"
-  virt_mode    = "paravirt"
-
-  device {
-    device_name = "sda"
-    disk_id     = linode_instance_disk.site_disk.id
-    volume_id   = 0
-  }
-
-  device {
-    device_name = "sdb"
-    disk_id     = linode_instance_disk.site_disk_swap.id
-    volume_id   = 0
-  }
-
-  helpers {
-    devtmpfs_automount = true
-    distro             = true
-    modules_dep        = true
-    network            = true
-    updatedb_disabled  = true
-  }
-}
-
-resource "linode_instance_disk" "site_disk_swap" {
-  filesystem = "swap"
-  label      = "512 MB Swap Image"
-  linode_id  = linode_instance.site.id
-  size       = 512
-}
-
-resource "linode_instance_disk" "site_disk" {
-  filesystem = "ext4"
-  label      = "Arch Linux Disk"
-  linode_id  = linode_instance.site.id
-  size       = 163328
-}
+#resource "linode_instance_config" "site_config" {
+#  #booted       = false
+#  #comments     = null
+#  kernel       = "linode/grub2"
+#  label        = "My Arch Linux Profile"
+#  linode_id    = linode_instance.site.id
+#  memory_limit = 0
+#  root_device  = "/dev/sda"
+#  run_level    = "default"
+#  virt_mode    = "paravirt"
+#
+#  device {
+#    device_name = "sda"
+#    disk_id     = linode_instance_disk.site_disk.id
+#    volume_id   = 0
+#  }
+#
+#  device {
+#    device_name = "sdb"
+#    disk_id     = linode_instance_disk.site_disk_swap.id
+#    volume_id   = 0
+#  }
+#
+#  helpers {
+#    devtmpfs_automount = true
+#    distro             = true
+#    modules_dep        = true
+#    network            = true
+#    updatedb_disabled  = true
+#  }
+#}
+#
+#resource "linode_instance_disk" "site_disk_swap" {
+#  filesystem = "swap"
+#  label      = "512 MB Swap Image"
+#  linode_id  = linode_instance.site.id
+#  size       = 512
+#}
+#
+#resource "linode_instance_disk" "site_disk" {
+#  filesystem = "ext4"
+#  label      = "Arch Linux Disk"
+#  linode_id  = linode_instance.site.id
+#  size       = 163328
+#}
