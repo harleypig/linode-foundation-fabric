@@ -61,44 +61,20 @@ variable "alert" {
   }
 }
 
-#variable "cpu_alert_threshold" {
-#  description = "CPU usage alert threshold."
-#  type        = number
-#  default     = 90
-#}
-#
-#variable "io_alert_threshold" {
-#  description = "IO usage alert threshold."
-#  type        = number
-#  default     = 10000
-#}
-#
-#variable "network_in_alert_threshold" {
-#  description = "Incoming traffic alert threshold in Mbps."
-#  type        = number
-#  default     = 10
-#}
-#
-#variable "network_out_alert_threshold" {
-#  description = "Outgoing traffic alert threshold in Mbps."
-#  type        = number
-#  default     = 10
-#}
-#
-#variable "transfer_quota_alert_threshold" {
-#  description = "Transfer quota alert threshold in percentage."
-#  type        = number
-#  default     = 80
-#}
-
-variable "group" {
-  description = "The group this Linode instance will be assigned to."
-  type        = string
-  default     = ""
-}
-
 variable "backups" {
   description = "If this Linode instance should have backups enabled."
   type        = bool
   default     = false
+}
+
+variable "watchdog" {
+  description = "The watchdog will reboot the instance if it powers off unexpectedly."
+  type        = bool
+  default     = false
+}
+
+variable "booted" {
+  description = "If true, then the instance is kept or converted into in a running state. If false, the instance will be shutdown."
+  type        = bool
+  default     = true
 }
