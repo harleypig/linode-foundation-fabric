@@ -33,8 +33,8 @@ variable "shared_ipv4" {
 
 variable "user_data" {
   description = "The base64-encoded user-defined data exposed to this instance through the Linode Metadata service."
-  type = string
-  default = ""
+  type        = string
+  default     = ""
 }
 
 variable "resize_disk" {
@@ -90,7 +90,7 @@ variable "migration_type" {
 variable "backup_id" {
   description = "A Backup ID from another Linode's available backups."
   type        = number
-  default = null
+  default     = null
 }
 
 variable "image" {
@@ -136,7 +136,7 @@ variable "virt_mode" {
 variable "helpers" {
   description = "A map of helper settings to use for the Linode instance."
   type        = map(bool)
-  default     = {
+  default = {
     devtmpfs_automount = true
     distro             = true
     modules_dep        = true

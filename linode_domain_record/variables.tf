@@ -15,21 +15,21 @@ variable "records" {
   }))
 
   validation {
-    condition     = alltrue([
+    condition = alltrue([
       for obj in var.records : obj.record_type != "SRV" || (obj.record_type == "SRV" && obj.name == null)
     ])
     error_message = "The name field must be null when the record_type is 'SRV'."
   }
 
   validation {
-    condition     = alltrue([
+    condition = alltrue([
       for obj in var.records : obj.record_type != "SRV" || obj.protocol == null || (obj.record_type == "SRV" && obj.protocol != null)
     ])
     error_message = "The protocol field must be set only when the record_type is 'SRV'."
   }
 
   validation {
-    condition     = alltrue([
+    condition = alltrue([
       for obj in var.records : obj.record_type != "SRV" || obj.service == null || (obj.record_type == "SRV" && obj.protocol != null)
     ])
     error_message = "The service field must be set only when the record_type is 'SRV'."
@@ -45,7 +45,7 @@ variable "records" {
   validation {
     condition = alltrue([
       for obj in values(var.records) :
-        contains([0, 30, 120, 300, 3600, 7200, 14400, 28800, 57600, 86400, 172800, 345600, 604800, 1209600, 2419200], obj.ttl_sec)
+      contains([0, 30, 120, 300, 3600, 7200, 14400, 28800, 57600, 86400, 172800, 345600, 604800, 1209600, 2419200], obj.ttl_sec)
     ])
     error_message = "The ttl_sec must be one of the specified valid values."
   }
