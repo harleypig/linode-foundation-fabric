@@ -1,3 +1,4 @@
+# Separate these variable definitions so that required variables are at the top, AI!
 variable "backup_id" {
   description = "A Backup ID from another Linode's available backups."
   type        = number
