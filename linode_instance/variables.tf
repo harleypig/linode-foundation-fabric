@@ -1,4 +1,28 @@
-# Separate these variable definitions so that required variables are at the top, AI!
+variable "image" {
+  description = "The image to use for the Linode instance."
+  type        = string
+}
+
+variable "label" {
+  description = "The label of the Linode instance."
+  type        = string
+}
+
+variable "region" {
+  description = "The region where the Linode instance will be created."
+  type        = string
+}
+
+variable "root_pass" {
+  description = "The initial password for the root user account."
+  type        = string
+}
+
+variable "type" {
+  description = "The type of the Linode instance (determines the pricing and specifications)."
+  type        = string
+}
+
 variable "backup_id" {
   description = "A Backup ID from another Linode's available backups."
   type        = number
@@ -29,20 +53,10 @@ variable "helpers" {
   }
 }
 
-variable "image" {
-  description = "The image to use for the Linode instance."
-  type        = string
-}
-
 variable "kernel" {
   description = "The kernel to use for the Linode instance."
   type        = string
   default     = "linode/grub2"
-}
-
-variable "label" {
-  description = "The label of the Linode instance."
-  type        = string
 }
 
 variable "memory_limit" {
@@ -63,11 +77,6 @@ variable "private_ip" {
   default     = false
 }
 
-variable "region" {
-  description = "The region where the Linode instance will be created."
-  type        = string
-}
-
 variable "resize_disk" {
   description = "If true, changes in Linode type will attempt to upsize or downsize implicitly created disks."
   type        = bool
@@ -78,11 +87,6 @@ variable "root_device" {
   description = "The root device to use for booting the Linode instance."
   type        = string
   default     = "/dev/sda"
-}
-
-variable "root_pass" {
-  description = "The initial password for the root user account."
-  type        = string
 }
 
 variable "run_level" {
@@ -107,11 +111,6 @@ variable "tags" {
   description = "A list of tags to apply to the Linode instance."
   type        = list(string)
   default     = []
-}
-
-variable "type" {
-  description = "The type of the Linode instance (determines the pricing and specifications)."
-  type        = string
 }
 
 variable "user_data" {
