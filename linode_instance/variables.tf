@@ -127,4 +127,8 @@ variable "helpers" {
   }
 }
 
-# Add a variable description for the swap_size attribute here, AI!
+variable "swap_size" {
+  description = "The size of the swap space in MB for the Linode instance."
+  type        = number
+  default     = 512
+}
