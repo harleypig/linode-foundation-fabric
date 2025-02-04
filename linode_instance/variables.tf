@@ -1,3 +1,4 @@
+# Sort these variable definitions alphabetically by variable name, AI!
 variable "region" {
   description = "The region where the Linode instance will be created."
   type        = string
