@@ -1,3 +1,6 @@
+##############################################################################
+# Required variables
+
 variable "image" {
   description = "The image to use for the Linode instance."
   type        = string
@@ -13,15 +16,20 @@ variable "region" {
   type        = string
 }
 
+# Required if image is used
 variable "root_pass" {
   description = "The initial password for the root user account."
   type        = string
+  default = ""
 }
 
 variable "type" {
   description = "The type of the Linode instance (determines the pricing and specifications)."
   type        = string
 }
+
+##############################################################################
+# Optional variables
 
 variable "backup_id" {
   description = "A Backup ID from another Linode's available backups."

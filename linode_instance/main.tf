@@ -6,6 +6,6 @@ resource "linode_instance" "site" {
   migration_type   = var.migration_type
   resize_disk      = var.resize_disk
   backups_enabled  = var.backups
-  alert            = var.alert
   tags             = var.tags
+  swap_size = var.swap_size
 }
