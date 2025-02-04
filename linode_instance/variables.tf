@@ -43,24 +43,6 @@ variable "resize_disk" {
   default     = false
 }
 
-variable "alert" {
-  description = "Alert thresholds for CPU, IO, network, and transfer quota."
-  type = object({
-    cpu            = number
-    io             = number
-    network_in     = number
-    network_out    = number
-    transfer_quota = number
-  })
-  default = {
-    cpu            = 90
-    io             = 10000
-    network_in     = 10
-    network_out    = 10
-    transfer_quota = 80
-  }
-}
-
 variable "backups" {
   description = "If this Linode instance should have backups enabled."
   type        = bool
@@ -144,3 +126,5 @@ variable "helpers" {
     updatedb_disabled  = true
   }
 }
+
+# Add a variable description for the swap_size attribute here, AI!
