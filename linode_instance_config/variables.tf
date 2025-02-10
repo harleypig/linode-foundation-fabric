@@ -1,6 +1,8 @@
-# This file contains variable definitions for the linode_instance_config resource. Deprecated definitions have been removed.
+# The 'devices' block is deprecated and replaced by the 'device' block.
 
-# Deprecated variables have been removed from this file. The 'devices' block is deprecated and replaced by the 'device' block.
+# Define the following variables, AI!
+# * interface
+# * kernel
 
 variable "linode_id" {
   description = "The ID of the Linode to create this configuration profile under."
