@@ -46,7 +46,11 @@ variable "run_level" {
   default     = "default"
 }
 
-# Add definition for virt_mode, AI!
+variable "virt_mode" {
+  description = "Controls the virtualization mode. (paravirt, fullvirt)"
+  type        = string
+  default     = "paravirt"
+}
 
 variable "helpers" {
   description = "Helpers enabled when booting to this Linode Config."
