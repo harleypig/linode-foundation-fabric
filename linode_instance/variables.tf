@@ -154,4 +154,12 @@ variable "alerts" {
   default = null
 }
 
-# Define timeouts variable based on timeouts block in main.tf, AI!
+variable "timeouts" {
+  description = "The timeouts configuration for the Linode instance."
+  type = object({
+    create = optional(string)
+    update = optional(string)
+    delete = optional(string)
+  })
+  default = null
+}
