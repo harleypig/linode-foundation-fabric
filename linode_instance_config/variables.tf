@@ -1,8 +1,18 @@
 # The 'devices' block is deprecated and replaced by the 'device' block.
 
-# Define the following variables, AI!
-# * interface
-# * kernel
+# The 'devices' block is deprecated and replaced by the 'device' block.
+
+variable "interface" {
+  description = "An array of Network Interfaces to use for this Configuration Profile."
+  type        = list(map(string))
+  default     = []
+}
+
+variable "kernel" {
+  description = "A Kernel ID to boot a Linode with. Default is linode/latest-64bit."
+  type        = string
+  default     = "linode/latest-64bit"
+}
 
 variable "linode_id" {
   description = "The ID of the Linode to create this configuration profile under."
