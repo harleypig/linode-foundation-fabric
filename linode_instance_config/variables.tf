@@ -1,3 +1,4 @@
+# Remove the deprecated definitions and leave a comment at the top of the file indicating such, AI!
 variable "linode_id" {
   description = "The ID of the Linode to create this configuration profile under."
   type        = number
