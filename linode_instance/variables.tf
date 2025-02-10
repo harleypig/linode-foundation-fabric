@@ -38,7 +38,11 @@ variable "placement_group_externally_managed" {
   default     = false
 }
 
-# Define resize_disk, AI!
+variable "resize_disk" {
+  description = "If true, changes in Linode type will attempt to upsize or downsize implicitly created disks."
+  type        = bool
+  default     = false
+}
 
 variable "image" {
   description = "An Image ID to deploy the Disk from."
