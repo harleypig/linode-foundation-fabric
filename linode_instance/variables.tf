@@ -44,7 +44,41 @@ variable "resize_disk" {
   default     = false
 }
 
-# Define backups_enabled, watchdog_enabled, booted, migration_type, firewall_id, disk_encryption, AI!
+variable "backups_enabled" {
+  description = "If true, the created Linode will automatically be enrolled in the Linode Backup service."
+  type        = bool
+  default     = false
+}
+
+variable "watchdog_enabled" {
+  description = "The watchdog, named Lassie, is a Shutdown Watchdog that monitors your Linode."
+  type        = bool
+  default     = false
+}
+
+variable "booted" {
+  description = "If true, then the instance is kept or converted into a running state."
+  type        = bool
+  default     = true
+}
+
+variable "migration_type" {
+  description = "The type of migration to use when updating the type or region of a Linode."
+  type        = string
+  default     = "cold"
+}
+
+variable "firewall_id" {
+  description = "The ID of the Firewall to attach to the instance upon creation."
+  type        = string
+  default     = null
+}
+
+variable "disk_encryption" {
+  description = "The disk encryption policy for this instance."
+  type        = string
+  default     = "enabled"
+}
 
 variable "image" {
   description = "An Image ID to deploy the Disk from."
