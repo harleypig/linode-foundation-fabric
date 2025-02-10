@@ -1,4 +1,5 @@
-# Remove the deprecated definitions and leave a comment at the top of the file indicating such, AI!
+# This file contains variable definitions for the linode_instance_config resource. Deprecated definitions have been removed.
+
 variable "linode_id" {
   description = "The ID of the Linode to create this configuration profile under."
   type        = number
@@ -19,12 +20,6 @@ variable "comments" {
   description = "Optional field for arbitrary User comments on this Config."
   type        = string
   default     = null
-}
-
-variable "devices" {
-  description = "A dictionary of device disks to use as a device map in a Linode’s configuration profile."
-  type        = map(any)
-  default     = {}
 }
 
 variable "helpers" {
