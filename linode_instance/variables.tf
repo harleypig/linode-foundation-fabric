@@ -141,3 +141,5 @@ variable "placement_group_id" {
   type        = string
   default     = null
 }
+
+# Define alerts variable for alerts block in main.tf, AI!
