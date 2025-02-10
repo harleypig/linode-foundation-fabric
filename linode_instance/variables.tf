@@ -128,7 +128,6 @@ variable "swap_size" {
   default     = 512
 }
 
-
 variable "metadata" {
   description = "The metadata configuration for the Linode instance."
   type        = object({
@@ -136,3 +135,5 @@ variable "metadata" {
   })
   default     = null
 }
+
+# Define a variable for placement_group in main.tf, AI!
