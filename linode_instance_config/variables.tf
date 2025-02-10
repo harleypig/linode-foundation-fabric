@@ -1,17 +1,6 @@
 # The 'devices' block is deprecated and replaced by the 'device' block.
 
-# Put these variable definitions in the same order as in the documentation, AI!
-variable "interface" {
-  description = "An array of Network Interfaces to use for this Configuration Profile."
-  type        = list(map(string))
-  default     = []
-}
-
-variable "kernel" {
-  description = "A Kernel ID to boot a Linode with. Default is linode/latest-64bit."
-  type        = string
-  default     = "linode/latest-64bit"
-}
+# The 'devices' block is deprecated and replaced by the 'device' block.
 
 variable "linode_id" {
   description = "The ID of the Linode to create this configuration profile under."
@@ -45,6 +34,18 @@ variable "helpers" {
     network            = true,
     updatedb_disabled  = true
   }
+}
+
+variable "interface" {
+  description = "An array of Network Interfaces to use for this Configuration Profile."
+  type        = list(map(string))
+  default     = []
+}
+
+variable "kernel" {
+  description = "A Kernel ID to boot a Linode with. Default is linode/latest-64bit."
+  type        = string
+  default     = "linode/latest-64bit"
 }
 
 variable "memory_limit" {
