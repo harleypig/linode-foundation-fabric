@@ -142,4 +142,14 @@ variable "placement_group_id" {
   default     = null
 }
 
-# Define alerts variable for alerts block in main.tf, AI!
+variable "alerts" {
+  description = "The alerts configuration for the Linode instance."
+  type = object({
+    cpu           = number
+    network_in    = number
+    network_out   = number
+    transfer_quota = number
+    io            = number
+  })
+  default = null
+}
