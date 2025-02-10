@@ -1,7 +1,6 @@
 # The 'devices' block is deprecated and replaced by the 'device' block.
 
-# The 'devices' block is deprecated and replaced by the 'device' block.
-
+# Put these variable definitions in the same order as in the documentation, AI!
 variable "interface" {
   description = "An array of Network Interfaces to use for this Configuration Profile."
   type        = list(map(string))
