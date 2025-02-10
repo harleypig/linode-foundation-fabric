@@ -36,5 +36,14 @@ resource "linode_instance" "instance" {
     }
   }
 
-  # Create a dynamice block for none or one alerts, AI!
+  dynamic "alerts" {
+    for_each = var.alerts != null ? [var.alerts] : []
+    content {
+      cpu           = alerts.value.cpu
+      network_in    = alerts.value.network_in
+      network_out   = alerts.value.network_out
+      transfer_quota = alerts.value.transfer_quota
+      io            = alerts.value.io
+    }
+  }
 }
