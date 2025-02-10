@@ -47,6 +47,13 @@ resource "linode_instance" "instance" {
     }
   }
 
-  # Create a dynamic block for one or none timeouts, AI!
+  dynamic "timeouts" {
+    for_each = var.timeouts != null ? [var.timeouts] : []
+    content {
+      create = timeouts.value.create
+      update = timeouts.value.update
+      delete = timeouts.value.delete
+    }
+  }
 
 }
