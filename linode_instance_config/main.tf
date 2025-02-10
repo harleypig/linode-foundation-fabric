@@ -24,6 +24,7 @@ resource "linode_instance_config" "this" {
     for_each = var.interface
     content {
       purpose      = interface.value.purpose
+      # The following four values are optional and have no default, AI!
       ipam_address = lookup(interface.value, "ipam_address", null)
       label        = lookup(interface.value, "label", null)
       subnet_id    = lookup(interface.value, "subnet_id", null)
