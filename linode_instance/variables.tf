@@ -127,3 +127,6 @@ variable "swap_size" {
   type        = number
   default     = 512
 }
+
+
+# Create a definition for metadata as defined in main.tf, AI!
