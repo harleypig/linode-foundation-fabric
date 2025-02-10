@@ -26,6 +26,12 @@ variable "private_ip" {
   default     = false
 }
 
+variable "placement_group_externally_managed" {
+  description = "If true, changes to the Linode's assigned Placement Group will be ignored."
+  type        = bool
+  default     = false
+}
+
 variable "shared_ipv4" {
   description = "A set of IPv4 addresses to be shared with the Instance."
   type        = list(string)
