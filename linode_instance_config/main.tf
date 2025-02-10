@@ -20,7 +20,14 @@ resource "linode_instance_config" "this" {
     }
   }
 
-  # Create a dynamic function for none, one, or many device blocks, AI!
+  dynamic "device" {
+    for_each = var.devices
+    content {
+      device_name = device.value.device_name
+      disk_id     = lookup(device.value, "disk_id", null)
+      volume_id   = lookup(device.value, "volume_id", null)
+    }
+  }
 
   dynamic "interface" {
     for_each = var.interface
