@@ -1,3 +1,4 @@
+# This is a library to be used in a module. Please make this support that, AI!
 output "instance_id" {
   description = "The ID of the Linode instance."
   value       = linode_instance.instance.id
