@@ -1,7 +1,5 @@
 # The 'devices' block is deprecated and replaced by the 'device' block.
 
-# The 'devices' block is deprecated and replaced by the 'device' block.
-
 variable "linode_id" {
   description = "The ID of the Linode to create this configuration profile under."
   type        = number
@@ -22,24 +20,6 @@ variable "comments" {
   description = "Optional field for arbitrary User comments on this Config."
   type        = string
   default     = null
-}
-
-variable "helpers" {
-  description = "Helpers enabled when booting to this Linode Config."
-  type        = map(bool)
-  default     = {
-    devtmpfs_automount = true,
-    distro             = true,
-    modules_dep        = true,
-    network            = true,
-    updatedb_disabled  = true
-  }
-}
-
-variable "interface" {
-  description = "An array of Network Interfaces to use for this Configuration Profile."
-  type        = list(map(string))
-  default     = []
 }
 
 variable "kernel" {
