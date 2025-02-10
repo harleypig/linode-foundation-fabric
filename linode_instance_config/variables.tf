@@ -20,6 +20,8 @@ variable "comments" {
   default     = null
 }
 
+# Add the variable definitions for devices and helpers, AI!
+
 variable "kernel" {
   description = "A Kernel ID to boot a Linode with. Default is linode/latest-64bit."
   type        = string
