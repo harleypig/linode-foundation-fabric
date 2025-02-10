@@ -1,3 +1,4 @@
+# This is a module that will be used as a source for a module. How can I make this generic, AI?
 output "gateway" {
   description = "The default gateway for this address"
   value       = linode_instance_ip.foo.gateway
