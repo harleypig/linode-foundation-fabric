@@ -26,6 +26,12 @@ variable "private_ip" {
   default     = false
 }
 
+variable "shared_ipv4" {
+  description = "A set of IPv4 addresses to be shared with the Instance."
+  type        = list(string)
+  default     = []
+}
+
 variable "image" {
   description = "An Image ID to deploy the Disk from."
   type        = string
