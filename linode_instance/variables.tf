@@ -26,7 +26,11 @@ variable "private_ip" {
   default     = false
 }
 
-# Create definition for shared_ipv4, AI!
+variable "shared_ipv4" {
+  description = "A set of IPv4 addresses to be shared with the Instance."
+  type        = list(string)
+  default     = []
+}
 
 variable "image" {
   description = "An Image ID to deploy the Disk from."
