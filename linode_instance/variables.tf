@@ -129,4 +129,10 @@ variable "swap_size" {
 }
 
 
-# Create a definition for metadata as defined in main.tf, AI!
+variable "metadata" {
+  description = "The metadata configuration for the Linode instance."
+  type        = object({
+    user_data = string
+  })
+  default     = null
+}
