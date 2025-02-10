@@ -104,6 +104,8 @@ variable "authorized_keys" {
   default     = []
 }
 
+# Define authorized_users, stackscript_id, stackscript_data, AI!
+
 variable "swap_size" {
   description = "The swap disk size for the newly-created Linode."
   type        = number
