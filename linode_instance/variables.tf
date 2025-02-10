@@ -80,7 +80,11 @@ variable "disk_encryption" {
   default     = "enabled"
 }
 
-# Define backup_id, AI!
+variable "backup_id" {
+  description = "A Backup ID from another Linode's available backups."
+  type        = string
+  default     = null
+}
 
 variable "image" {
   description = "An Image ID to deploy the Disk from."
