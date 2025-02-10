@@ -20,5 +20,22 @@ resource "linode_instance_config" "this" {
     }
   }
 
-  # Define a dynamic block for none, one, or many interface blocks, AI!
+  dynamic "interface" {
+    for_each = var.interface
+    content {
+      purpose      = lookup(interface.value, "purpose")
+      ipam_address = lookup(interface.value, "ipam_address", null)
+      label        = lookup(interface.value, "label", null)
+      subnet_id    = lookup(interface.value, "subnet_id", null)
+      primary      = lookup(interface.value, "primary", null)
+
+      dynamic "ipv4" {
+        for_each = lookup(interface.value, "ipv4", []) != [] ? [interface.value.ipv4] : []
+        content {
+          vpc    = lookup(ipv4.value, "vpc", null)
+          nat_1_1 = lookup(ipv4.value, "nat_1_1", null)
+        }
+      }
+    }
+  }
 }
