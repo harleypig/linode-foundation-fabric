@@ -35,4 +35,6 @@ resource "linode_instance" "instance" {
       id = placement_group.value
     }
   }
+
+  # Create a dynamice block for none or one alerts, AI!
 }
