@@ -20,12 +20,22 @@ variable "comments" {
   default     = null
 }
 
-# Add the variable definitions for devices and helpers, AI!
+variable "devices" {
+  description = "A dictionary of device disks to use as a device map in a Linode’s configuration profile."
+  type        = map(any)
+  default     = {}
+}
 
-variable "kernel" {
-  description = "A Kernel ID to boot a Linode with. Default is linode/latest-64bit."
-  type        = string
-  default     = "linode/latest-64bit"
+variable "helpers" {
+  description = "Helpers enabled when booting to this Linode Config."
+  type        = map(bool)
+  default     = {
+    devtmpfs_automount = true,
+    distro             = true,
+    modules_dep        = true,
+    network            = true,
+    updatedb_disabled  = true
+  }
 }
 
 variable "memory_limit" {
