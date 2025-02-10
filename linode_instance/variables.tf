@@ -136,4 +136,8 @@ variable "metadata" {
   default     = null
 }
 
-# Define a variable for placement_group in main.tf, AI!
+variable "placement_group_id" {
+  description = "The ID of the Placement Group to assign this Linode to."
+  type        = string
+  default     = null
+}
