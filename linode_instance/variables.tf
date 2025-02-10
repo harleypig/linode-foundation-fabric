@@ -80,6 +80,8 @@ variable "disk_encryption" {
   default     = "enabled"
 }
 
+# Define backup_id, AI!
+
 variable "image" {
   description = "An Image ID to deploy the Disk from."
   type        = string
