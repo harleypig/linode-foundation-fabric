@@ -28,4 +28,6 @@ resource "linode_instance" "instance" {
       user_data = base64encode(metadata.value.user_data)
     }
   }
+
+  # create a dynamic block for none or one placement_group, AI!
 }
