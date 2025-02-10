@@ -46,10 +46,18 @@ variable "run_level" {
   default     = "default"
 }
 
-variable "virt_mode" {
-  description = "Controls the virtualization mode. (paravirt, fullvirt)"
-  type        = string
-  default     = "paravirt"
+variable "interface" {
+  description = "An array of Network Interfaces to use for this Configuration Profile."
+  type        = list(object({
+    purpose      = string
+    ipam_address = optional(string)
+    label        = optional(string)
+    subnet_id    = optional(string)
+    primary      = optional(bool)
+    ipv4         = optional(object({
+      vpc    = optional(string)
+      nat_1_1 = optional(string)
+    }))
+  }))
+  default     = []
 }
-
-# Create a definition suitable for the interface dynamic block defined in main.tf, AI!
