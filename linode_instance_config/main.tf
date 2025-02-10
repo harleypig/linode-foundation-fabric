@@ -23,8 +23,7 @@ resource "linode_instance_config" "this" {
   dynamic "interface" {
     for_each = var.interface
     content {
-      # purpose is required but has not default, AI!
-      purpose      = lookup(interface.value, "purpose")
+      purpose      = interface.value.purpose
       ipam_address = lookup(interface.value, "ipam_address", null)
       label        = lookup(interface.value, "label", null)
       subnet_id    = lookup(interface.value, "subnet_id", null)
