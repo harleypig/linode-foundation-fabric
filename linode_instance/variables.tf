@@ -145,6 +145,7 @@ variable "placement_group_id" {
 variable "alerts" {
   description = "The alerts configuration for the Linode instance."
   type = object({
+    # Make these optional, AI!
     cpu           = number
     network_in    = number
     network_out   = number
