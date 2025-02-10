@@ -13,7 +13,7 @@ variable "label" {
 variable "booted" {
   description = "If true, the Linode will be booted into this config."
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "comments" {
@@ -49,13 +49,16 @@ variable "run_level" {
 variable "virt_mode" {
   description = "Controls the virtualization mode. (paravirt, fullvirt)"
   type        = string
-  default     = "paravirt"
+  default     = null
 }
 
 variable "helpers" {
   description = "Helpers enabled when booting to this Linode Config."
   type        = map(bool)
+  default = {}
 }
+
+# Create a definition for the device block defined in main.tf, AI!
 
 variable "interface" {
   description = "An array of Network Interfaces to use for this Configuration Profile."
