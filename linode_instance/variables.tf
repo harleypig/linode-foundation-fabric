@@ -14,6 +14,20 @@ variable "label" {
   default     = null
 }
 
+variable "tags" {
+  description = "A list of tags applied to this object."
+  type        = list(string)
+  default     = []
+}
+
+variable "private_ip" {
+  description = "If true, the created Linode will have private networking enabled."
+  type        = bool
+  default     = false
+}
+
+# Create definition for shared_ipv4, AI!
+
 variable "image" {
   description = "An Image ID to deploy the Disk from."
   type        = string
@@ -30,18 +44,6 @@ variable "root_pass" {
   description = "The initial password for the root user account."
   type        = string
   default     = null
-}
-
-variable "tags" {
-  description = "A list of tags applied to this object."
-  type        = list(string)
-  default     = []
-}
-
-variable "private_ip" {
-  description = "If true, the created Linode will have private networking enabled."
-  type        = bool
-  default     = false
 }
 
 variable "swap_size" {
