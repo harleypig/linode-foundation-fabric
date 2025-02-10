@@ -19,4 +19,6 @@ resource "linode_instance_config" "this" {
       updatedb_disabled  = lookup(helpers.value, "updatedb_disabled", true)
     }
   }
+
+  # Define a dynamic block for none, one, or many interface blocks, AI!
 }
