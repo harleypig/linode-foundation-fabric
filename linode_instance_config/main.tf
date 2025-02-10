@@ -8,4 +8,15 @@ resource "linode_instance_config" "this" {
   root_device  = var.root_device
   run_level    = var.run_level
   virt_mode    = var.virt_mode
+
+  dynamic "helpers" {
+    for_each = var.helpers != {} ? [var.helpers] : []
+    content {
+      devtmpfs_automount = lookup(helpers.value, "devtmpfs_automount", true)
+      distro             = lookup(helpers.value, "distro", true)
+      modules_dep        = lookup(helpers.value, "modules_dep", true)
+      network            = lookup(helpers.value, "network", true)
+      updatedb_disabled  = lookup(helpers.value, "updatedb_disabled", true)
+    }
+  }
 }
