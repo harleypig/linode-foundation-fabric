@@ -17,3 +17,5 @@ output "instance_status" {
   description = "The status of the Linode instance."
   value       = linode_instance.instance.status
 }
+
+# Create a definition for metadata as defined in main.tf, AI!
