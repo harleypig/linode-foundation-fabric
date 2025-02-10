@@ -44,6 +44,8 @@ variable "resize_disk" {
   default     = false
 }
 
+# Define backups_enabled, watchdog_enabled, booted, migration_type, firewall_id, disk_encryption, AI!
+
 variable "image" {
   description = "An Image ID to deploy the Disk from."
   type        = string
