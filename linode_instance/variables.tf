@@ -145,12 +145,11 @@ variable "placement_group_id" {
 variable "alerts" {
   description = "The alerts configuration for the Linode instance."
   type = object({
-    # Make these optional, AI!
-    cpu           = number
-    network_in    = number
-    network_out   = number
-    transfer_quota = number
-    io            = number
+    cpu           = optional(number)
+    network_in    = optional(number)
+    network_out   = optional(number)
+    transfer_quota = optional(number)
+    io            = optional(number)
   })
   default = null
 }
