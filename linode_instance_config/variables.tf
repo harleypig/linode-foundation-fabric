@@ -55,10 +55,18 @@ variable "virt_mode" {
 variable "helpers" {
   description = "Helpers enabled when booting to this Linode Config."
   type        = map(bool)
-  default = {}
+  default     = {}
 }
 
-# Create a definition for the device block defined in main.tf, AI!
+variable "devices" {
+  description = "A list of device configurations for the Linode instance."
+  type        = list(object({
+    device_name = string
+    disk_id     = optional(number)
+    volume_id   = optional(number)
+  }))
+  default     = []
+}
 
 variable "interface" {
   description = "An array of Network Interfaces to use for this Configuration Profile."
