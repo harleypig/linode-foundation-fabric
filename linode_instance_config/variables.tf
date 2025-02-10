@@ -61,3 +61,5 @@ variable "interface" {
   }))
   default     = []
 }
+
+# Create a definition suitable for the helpers dynamic block in main.tf, AI!
