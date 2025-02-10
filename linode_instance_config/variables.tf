@@ -51,3 +51,5 @@ variable "virt_mode" {
   type        = string
   default     = "paravirt"
 }
+
+# Create a definition suitable for the interface dynamic block defined in main.tf, AI!
