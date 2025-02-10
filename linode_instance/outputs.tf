@@ -1,0 +1,1 @@
+# Define outputs for the instance resource suitable for use as a source for a module, AI!
