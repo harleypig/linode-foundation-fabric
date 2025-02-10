@@ -1,5 +1,7 @@
 # This file contains variable definitions for the linode_instance_config resource. Deprecated definitions have been removed.
 
+# List deprecated variables, AI!
+
 variable "linode_id" {
   description = "The ID of the Linode to create this configuration profile under."
   type        = number
