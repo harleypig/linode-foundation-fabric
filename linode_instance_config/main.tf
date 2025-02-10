@@ -20,8 +20,9 @@ resource "linode_instance_config" "this" {
     }
   }
 
+  # Create a dynamic function for none, one, or many device blocks, AI!
+
   dynamic "interface" {
-    # Create a variable definition suitable for this block at the bottom of the variables.tf file, AI!
     for_each = var.interface
     content {
       purpose      = interface.value.purpose
