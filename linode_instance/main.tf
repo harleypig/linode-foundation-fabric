@@ -22,5 +22,5 @@ resource "linode_instance" "instance" {
   resize_disk     = var.resize_disk
   placement_group_externally_managed = var.placement_group_externally_managed
 
-  # Additional configuration can be added here
+  # Create a dynamice block for none or one metadata, AI!
 }
