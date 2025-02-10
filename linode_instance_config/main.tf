@@ -3,8 +3,6 @@ resource "linode_instance_config" "this" {
   label        = var.label
   booted       = var.booted
   comments     = var.comments
-  helpers      = var.helpers
-  interface    = var.interface
   kernel       = var.kernel
   memory_limit = var.memory_limit
   root_device  = var.root_device
