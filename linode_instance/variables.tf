@@ -130,10 +130,10 @@ variable "swap_size" {
 
 variable "metadata" {
   description = "The metadata configuration for the Linode instance."
-  type        = object({
+  type = object({
     user_data = string
   })
-  default     = null
+  default = null
 }
 
 variable "placement_group_id" {
@@ -145,11 +145,11 @@ variable "placement_group_id" {
 variable "alerts" {
   description = "The alerts configuration for the Linode instance."
   type = object({
-    cpu           = optional(number)
-    network_in    = optional(number)
-    network_out   = optional(number)
+    cpu            = optional(number)
+    network_in     = optional(number)
+    network_out    = optional(number)
     transfer_quota = optional(number)
-    io            = optional(number)
+    io             = optional(number)
   })
   default = null
 }
