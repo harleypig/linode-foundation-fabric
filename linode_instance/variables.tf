@@ -20,7 +20,7 @@ variable "region" {
 variable "root_pass" {
   description = "The initial password for the root user account."
   type        = string
-  default = ""
+  default     = ""
 }
 
 variable "type" {

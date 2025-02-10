@@ -60,26 +60,26 @@ variable "helpers" {
 
 variable "devices" {
   description = "A list of device configurations for the Linode instance."
-  type        = list(object({
+  type = list(object({
     device_name = string
     disk_id     = optional(number)
     volume_id   = optional(number)
   }))
-  default     = []
+  default = []
 }
 
 variable "interface" {
   description = "An array of Network Interfaces to use for this Configuration Profile."
-  type        = list(object({
+  type = list(object({
     purpose      = string
     ipam_address = optional(string)
     label        = optional(string)
     subnet_id    = optional(string)
     primary      = optional(bool)
-    ipv4         = optional(object({
-      vpc    = optional(string)
+    ipv4 = optional(object({
+      vpc     = optional(string)
       nat_1_1 = optional(string)
     }))
   }))
-  default     = []
+  default = []
 }
