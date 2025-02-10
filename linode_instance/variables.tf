@@ -153,3 +153,5 @@ variable "alerts" {
   })
   default = null
 }
+
+# Define timeouts variable based on timeouts block in main.tf, AI!
