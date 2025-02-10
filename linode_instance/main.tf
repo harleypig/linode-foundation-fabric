@@ -29,5 +29,10 @@ resource "linode_instance" "instance" {
     }
   }
 
-  # create a dynamic block for none or one placement_group, AI!
+  dynamic "placement_group" {
+    for_each = var.placement_group_id != null ? [var.placement_group_id] : []
+    content {
+      id = placement_group.value
+    }
+  }
 }
