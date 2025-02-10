@@ -46,6 +46,18 @@ variable "run_level" {
   default     = "default"
 }
 
+variable "helpers" {
+  description = "Helpers enabled when booting to this Linode Config."
+  type        = map(bool)
+  default     = {
+    devtmpfs_automount = true,
+    distro             = true,
+    modules_dep        = true,
+    network            = true,
+    updatedb_disabled  = true
+  }
+}
+
 variable "interface" {
   description = "An array of Network Interfaces to use for this Configuration Profile."
   type        = list(object({
