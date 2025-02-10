@@ -25,6 +25,7 @@ resource "linode_instance" "instance" {
   dynamic "metadata" {
     for_each = var.metadata != null ? [var.metadata] : []
     content {
+      # user_data is a string, so it needs to be base64 encoded, AI!
       user_data = metadata.value.user_data
     }
   }
