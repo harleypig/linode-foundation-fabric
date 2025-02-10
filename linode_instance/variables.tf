@@ -104,7 +104,23 @@ variable "authorized_keys" {
   default     = []
 }
 
-# Define authorized_users, stackscript_id, stackscript_data, AI!
+variable "authorized_users" {
+  description = "A list of Linode usernames. If the usernames have associated SSH keys, the keys will be appended to the root user's ~/.ssh/authorized_keys file automatically."
+  type        = list(string)
+  default     = []
+}
+
+variable "stackscript_id" {
+  description = "The StackScript to deploy to the newly created Linode."
+  type        = string
+  default     = null
+}
+
+variable "stackscript_data" {
+  description = "An object containing responses to any User Defined Fields present in the StackScript being deployed to this Linode."
+  type        = map(any)
+  default     = {}
+}
 
 variable "swap_size" {
   description = "The swap disk size for the newly-created Linode."
