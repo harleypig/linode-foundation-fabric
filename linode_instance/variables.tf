@@ -1,4 +1,3 @@
-# Put these definitions in the same order they appear in the documentation, AI!
 variable "region" {
   description = "The location where the Linode is deployed."
   type        = string
@@ -15,16 +14,40 @@ variable "label" {
   default     = null
 }
 
+variable "image" {
+  description = "An Image ID to deploy the Disk from."
+  type        = string
+  default     = null
+}
+
+variable "authorized_keys" {
+  description = "A list of SSH public keys to deploy for the root user on the newly created Linode."
+  type        = list(string)
+  default     = []
+}
+
+variable "root_pass" {
+  description = "The initial password for the root user account."
+  type        = string
+  default     = null
+}
+
 variable "tags" {
   description = "A list of tags applied to this object."
   type        = list(string)
   default     = []
 }
 
-variable "image" {
-  description = "An Image ID to deploy the Disk from."
-  type        = string
-  default     = null
+variable "private_ip" {
+  description = "If true, the created Linode will have private networking enabled."
+  type        = bool
+  default     = false
+}
+
+variable "swap_size" {
+  description = "The swap disk size for the newly-created Linode."
+  type        = number
+  default     = 512
 }
 
 variable "migration_type" {
@@ -43,10 +66,4 @@ variable "backups" {
   description = "If true, the created Linode will automatically be enrolled in the Linode Backup service."
   type        = bool
   default     = false
-}
-
-variable "swap_size" {
-  description = "The swap disk size for the newly-created Linode."
-  type        = number
-  default     = 512
 }
