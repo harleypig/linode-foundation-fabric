@@ -46,16 +46,11 @@ variable "run_level" {
   default     = "default"
 }
 
+# Add definition for virt_mode, AI!
+
 variable "helpers" {
   description = "Helpers enabled when booting to this Linode Config."
   type        = map(bool)
-  default     = {
-    devtmpfs_automount = true,
-    distro             = true,
-    modules_dep        = true,
-    network            = true,
-    updatedb_disabled  = true
-  }
 }
 
 variable "interface" {
