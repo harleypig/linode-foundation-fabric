@@ -9,7 +9,6 @@ resource "linode_instance_config" "this" {
   run_level    = var.run_level
   virt_mode    = var.virt_mode
 
-  # Ensure there is one or none helpers blocks, AI!
   dynamic "helpers" {
     for_each = var.helpers != {} ? [var.helpers] : []
     content {
