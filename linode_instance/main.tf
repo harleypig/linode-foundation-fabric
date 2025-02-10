@@ -22,5 +22,10 @@ resource "linode_instance" "instance" {
   resize_disk     = var.resize_disk
   placement_group_externally_managed = var.placement_group_externally_managed
 
-  # Create a dynamice block for none or one metadata, AI!
+  dynamic "metadata" {
+    for_each = var.metadata != null ? [var.metadata] : []
+    content {
+      user_data = metadata.value.user_data
+    }
+  }
 }
