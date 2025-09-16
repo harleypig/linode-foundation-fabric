@@ -29,8 +29,8 @@ variable "region" {
 
   validation {
     condition = contains([
-      "ap-west", "ca-central", "ap-southeast", "us-central", "us-west", 
-      "us-southeast", "us-east", "eu-west", "ap-south", "eu-central", 
+      "ap-west", "ca-central", "ap-southeast", "us-central", "us-west",
+      "us-southeast", "us-east", "eu-west", "ap-south", "eu-central",
       "ap-northeast"
     ], var.region)
     error_message = "Region must be a valid Linode region."
