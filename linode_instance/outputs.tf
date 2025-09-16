@@ -5,7 +5,7 @@ output "instance_id" {
 
 output "instance_ip_address" {
   description = "The public IP address of the Linode instance."
-  value       = linode_instance.instance.ip_address
+  value       = linode_instance.instance.ipv4[0]
 }
 
 output "instance_private_ip_address" {

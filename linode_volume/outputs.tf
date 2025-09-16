@@ -38,12 +38,3 @@ output "tags" {
   value       = linode_volume.this.tags
 }
 
-output "created" {
-  description = "When this Volume was created."
-  value       = linode_volume.this.created
-}
-
-output "updated" {
-  description = "When this Volume was last updated."
-  value       = linode_volume.this.updated
-}
