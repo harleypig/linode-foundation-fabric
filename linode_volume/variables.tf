@@ -40,10 +40,11 @@ variable "region" {
 variable "linode_id" {
   description = "The Linode ID to attach the volume to."
   type        = number
+  default     = null
 
   validation {
-    condition     = var.linode_id > 0
-    error_message = "Linode ID must be a positive integer."
+    condition     = var.linode_id == null || var.linode_id > 0
+    error_message = "Linode ID must be a positive integer when specified."
   }
 }
 
