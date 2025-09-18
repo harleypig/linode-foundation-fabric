@@ -27,7 +27,9 @@ This module supports volume resizing by updating the `size` parameter.
 - Resizing can be performed while the volume is attached and in use
 
 ### Filesystem Expansion
-**Important**: This module only resizes the volume at the block device level. After resizing, you must manually expand the filesystem:
+**Note**: If using the golden image with automatic volume management, filesystem expansion is handled automatically. The system detects volume resizes and expands the filesystem without manual intervention.
+
+For manual expansion (if not using the golden image):
 
 ```bash
 # For ext4 filesystems
