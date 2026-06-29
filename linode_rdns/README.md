@@ -23,7 +23,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_rdns"></a> [rdns](#input\_rdns) | Reverse DNS entries | <pre>map(object({<br>    address = string<br>    rdns    = string<br>    wait    = optional(bool)<br>  }))</pre> | n/a | yes |
+| <a name="input_rdns"></a> [rdns](#input\_rdns) | Reverse DNS entries | <pre>map(object({<br/>    address = string<br/>    rdns    = string<br/>  }))</pre> | n/a | yes |
 
 ## Outputs
 

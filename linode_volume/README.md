@@ -64,29 +64,51 @@ module "volume" {
 }
 ```
 
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+No requirements.
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| <a name="provider_linode"></a> [linode](#provider\_linode) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [linode_volume.this](https://registry.terraform.io/providers/linode/linode/latest/docs/resources/volume) | resource |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| label | The label of the Linode Volume | `string` | n/a | yes |
-| size | Size of the Volume in GB (10-10240) | `number` | n/a | yes |
-| region | The region where this volume will be deployed | `string` | n/a | yes |
-| linode_id | The Linode ID to attach the volume to | `number` | `null` | no |
-| tags | An array of tags applied to this object | `list(string)` | `[]` | no |
-| timeouts | Timeout configuration for volume operations | `object` | `null` | no |
+| <a name="input_label"></a> [label](#input\_label) | The label of the Linode Volume. | `string` | n/a | yes |
+| <a name="input_region"></a> [region](#input\_region) | The region where this volume will be deployed. | `string` | n/a | yes |
+| <a name="input_size"></a> [size](#input\_size) | Size of the Volume in GB. | `number` | n/a | yes |
+| <a name="input_linode_id"></a> [linode\_id](#input\_linode\_id) | The Linode ID to attach the volume to. | `number` | `null` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | An array of tags applied to this object. | `list(string)` | `[]` | no |
+| <a name="input_timeouts"></a> [timeouts](#input\_timeouts) | The timeouts configuration for the Linode volume. | <pre>object({<br/>    create = optional(string)<br/>    update = optional(string)<br/>    delete = optional(string)<br/>  })</pre> | `null` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| id | The unique ID of this Volume |
-| label | The label of the Linode Volume |
-| size | The size of the Volume in GB |
-| region | The region where this volume resides |
-| linode_id | The ID of the attached Linode (if any) |
-| filesystem_path | The full filesystem path for the Volume |
-| status | The status of the volume |
-| tags | An array of tags applied to this object |
+| <a name="output_filesystem_path"></a> [filesystem\_path](#output\_filesystem\_path) | The full filesystem path for the Volume based on the Volume's label. |
+| <a name="output_id"></a> [id](#output\_id) | The unique ID of this Volume. |
+| <a name="output_label"></a> [label](#output\_label) | The label of the Linode Volume. |
+| <a name="output_linode_id"></a> [linode\_id](#output\_linode\_id) | If a volume is attached to a specific Linode, the ID of that Linode will be displayed here. |
+| <a name="output_region"></a> [region](#output\_region) | The region where this volume resides. |
+| <a name="output_size"></a> [size](#output\_size) | The size of the Volume in GB. |
+| <a name="output_status"></a> [status](#output\_status) | The status of the volume, indicating if it's active or if any action is needed. |
+| <a name="output_tags"></a> [tags](#output\_tags) | An array of tags applied to this object. |
+<!-- END_TF_DOCS -->
 
 ## Notes
 

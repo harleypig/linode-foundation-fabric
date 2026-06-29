@@ -23,7 +23,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_domains"></a> [domains](#input\_domains) | Domain data. | <pre>map(object({<br>    domain      = string<br>    soa_email   = string<br><br>    description = optional(string)<br>    expire_sec  = optional(number)<br>    group       = optional(string)<br>    refresh_sec = optional(number)<br>    retry_sec   = optional(number)<br>    status      = optional(string)<br>    tags        = optional(list(string))<br>    ttl_sec     = optional(number)<br>  }))</pre> | n/a | yes |
+| <a name="input_domains"></a> [domains](#input\_domains) | Domain data. | <pre>map(object({<br/>    domain    = string<br/>    soa_email = string<br/><br/>    description = optional(string)<br/>    expire_sec  = optional(number)<br/>    group       = optional(string)<br/>    refresh_sec = optional(number)<br/>    retry_sec   = optional(number)<br/>    status      = optional(string)<br/>    tags        = optional(list(string))<br/>    ttl_sec     = optional(number)<br/>  }))</pre> | n/a | yes |
 
 ## Outputs
 

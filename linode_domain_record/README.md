@@ -23,7 +23,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_records"></a> [records](#input\_records) | DNS records | <pre>map(object({<br>    domain_id   = number<br>    record_type = string<br>    target      = string<br>    name        = optional(string)<br>    ttl_sec     = optional(number)<br>    priority    = optional(number)<br>    protocol    = optional(string)<br>    service     = optional(string)<br>    tag         = optional(string)<br>    port        = optional(number)<br>    weight      = optional(number)<br>  }))</pre> | n/a | yes |
+| <a name="input_records"></a> [records](#input\_records) | DNS records | <pre>map(object({<br/>    domain_id   = number<br/>    record_type = string<br/>    target      = string<br/>    name        = optional(string)<br/>    ttl_sec     = optional(number)<br/>    priority    = optional(number)<br/>    protocol    = optional(string)<br/>    service     = optional(string)<br/>    tag         = optional(string)<br/>    port        = optional(number)<br/>    weight      = optional(number)<br/>  }))</pre> | n/a | yes |
 
 ## Outputs
 
