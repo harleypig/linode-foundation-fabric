@@ -1,3 +1,8 @@
+# ICEBOX: applying a custom least-privilege cloud firewall to harleypig-com is
+# deferred — single host, Linode's default firewall suffices. Revisit on
+# topology growth (more hosts, a NodeBalancer, services needing tighter
+# ingress). The module below is ready to deploy; see README.md.
+
 resource "linode_firewall" "this" {
   label    = var.label
   disabled = var.disabled
