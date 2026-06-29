@@ -1,0 +1,69 @@
+# Plan-only tests for the linode_domain module. command = plan never creates
+# real infrastructure; mock_provider satisfies provider config so no Linode
+# token is needed. Run: terraform -chdir=tfmods/linode_domain test
+#
+# Note: the *_sec fields are `optional` but each is validated against a fixed
+# allowed-values set, so valid input must supply all four (an omitted field is
+# null and fails `contains(...)`). These tests reflect that actual behavior.
+
+mock_provider "linode" {}
+
+variables {
+  domains = {
+    "example.com" = {
+      domain      = "example.com"
+      soa_email   = "admin@example.com"
+      ttl_sec     = 300
+      retry_sec   = 300
+      expire_sec  = 300
+      refresh_sec = 300
+    }
+  }
+}
+
+run "valid_domain_plans" {
+  command = plan
+
+  assert {
+    condition     = length(linode_domain.domains) == 1
+    error_message = "expected exactly one planned domain"
+  }
+}
+
+run "rejects_invalid_ttl_sec" {
+  command = plan
+
+  variables {
+    domains = {
+      "example.com" = {
+        domain      = "example.com"
+        soa_email   = "admin@example.com"
+        ttl_sec     = 999 # not in the allowed set
+        retry_sec   = 300
+        expire_sec  = 300
+        refresh_sec = 300
+      }
+    }
+  }
+
+  expect_failures = [var.domains]
+}
+
+run "rejects_invalid_refresh_sec" {
+  command = plan
+
+  variables {
+    domains = {
+      "example.com" = {
+        domain      = "example.com"
+        soa_email   = "admin@example.com"
+        ttl_sec     = 300
+        retry_sec   = 300
+        expire_sec  = 300
+        refresh_sec = 12345 # not in the allowed set
+      }
+    }
+  }
+
+  expect_failures = [var.domains]
+}
