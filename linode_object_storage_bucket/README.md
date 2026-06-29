@@ -1,7 +1,11 @@
 # Linode Object Storage Bucket Terraform Module
 
-Creates and manages a single Linode Object Storage bucket. This repo uses it
-to manage the remote-state bucket itself (see `bootstrap/`).
+Creates and manages a single Linode Object Storage bucket.
+
+It has **no consumer in this repo yet** — the Terraform state bucket itself is
+created out of band by `bin/setup-bucket` (a state bucket can't be managed by a
+config whose state lives inside it; see `docs/backend-storage.md`). This module
+is retained for future Object Storage needs (Track C).
 
 ## Usage
 
