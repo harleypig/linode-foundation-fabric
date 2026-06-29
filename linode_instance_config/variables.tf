@@ -3,11 +3,21 @@
 variable "linode_id" {
   description = "The ID of the Linode to create this configuration profile under."
   type        = number
+
+  validation {
+    condition     = var.linode_id > 0
+    error_message = "Linode ID must be a positive integer."
+  }
 }
 
 variable "label" {
   description = "The Config’s label for display purposes only."
   type        = string
+
+  validation {
+    condition     = length(var.label) >= 1 && length(var.label) <= 48 && can(regex("^[a-zA-Z0-9][a-zA-Z0-9._-]*$", var.label))
+    error_message = "Label must be 1-48 chars, start alphanumeric, and contain only letters, digits, dots, hyphens, underscores."
+  }
 }
 
 variable "booted" {
@@ -32,6 +42,11 @@ variable "memory_limit" {
   description = "The memory limit of the Config. Defaults to the total ram of the Linode."
   type        = number
   default     = null
+
+  validation {
+    condition     = var.memory_limit == null || var.memory_limit >= 0
+    error_message = "memory_limit must be >= 0 (0 means use the Linode's full RAM)."
+  }
 }
 
 variable "root_device" {
@@ -44,12 +59,22 @@ variable "run_level" {
   description = "Defines the state of your Linode after booting. (default, single, binbash)"
   type        = string
   default     = "default"
+
+  validation {
+    condition     = contains(["default", "single", "binbash"], var.run_level)
+    error_message = "run_level must be one of: default, single, binbash."
+  }
 }
 
 variable "virt_mode" {
   description = "Controls the virtualization mode. (paravirt, fullvirt)"
   type        = string
   default     = null
+
+  validation {
+    condition     = var.virt_mode == null || contains(["paravirt", "fullvirt"], var.virt_mode)
+    error_message = "virt_mode must be paravirt or fullvirt."
+  }
 }
 
 variable "helpers" {
@@ -66,6 +91,11 @@ variable "devices" {
     volume_id   = optional(number)
   }))
   default = []
+
+  validation {
+    condition     = alltrue([for d in var.devices : contains(["sda", "sdb", "sdc", "sdd", "sde", "sdf", "sdg", "sdh"], d.device_name)])
+    error_message = "Each device device_name must be one of sda..sdh."
+  }
 }
 
 variable "interface" {
@@ -82,4 +112,9 @@ variable "interface" {
     }))
   }))
   default = []
+
+  validation {
+    condition     = alltrue([for i in var.interface : contains(["public", "vlan", "vpc"], i.purpose)])
+    error_message = "Each interface purpose must be one of: public, vlan, vpc."
+  }
 }
