@@ -139,3 +139,28 @@ run "rejects_bad_tag" {
 
   expect_failures = [var.tags]
 }
+
+run "rejects_invalid_outbound_rule_action" {
+  command = plan
+
+  variables {
+    outbound = [{
+      label    = "bad-action"
+      action   = "MAYBE" # only ACCEPT or DROP
+      protocol = "TCP"
+      ports    = "80"
+    }]
+  }
+
+  expect_failures = [var.outbound]
+}
+
+run "rejects_negative_nodebalancer_id" {
+  command = plan
+
+  variables {
+    nodebalancers = [-1] # must be positive
+  }
+
+  expect_failures = [var.nodebalancers]
+}

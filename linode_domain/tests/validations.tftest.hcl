@@ -115,3 +115,35 @@ run "rejects_bad_soa_email" {
 
   expect_failures = [var.domains]
 }
+
+run "rejects_bad_status" {
+  command = plan
+
+  variables {
+    domains = {
+      bad = {
+        domain    = "example.com"
+        soa_email = "admin@example.com"
+        status    = "paused" # not active/disabled/edit_mode
+      }
+    }
+  }
+
+  expect_failures = [var.domains]
+}
+
+run "rejects_bad_tag" {
+  command = plan
+
+  variables {
+    domains = {
+      bad = {
+        domain    = "example.com"
+        soa_email = "admin@example.com"
+        tags      = ["a"] # shorter than the 3-char minimum
+      }
+    }
+  }
+
+  expect_failures = [var.domains]
+}

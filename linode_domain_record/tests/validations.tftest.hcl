@@ -129,3 +129,37 @@ run "valid_with_omitted_ttl" {
     error_message = "a record with omitted ttl_sec should plan"
   }
 }
+
+run "rejects_weight_out_of_range" {
+  command = plan
+
+  variables {
+    records = {
+      bad = {
+        domain_id   = 123
+        record_type = "SRV"
+        target      = "sip.example.com"
+        weight      = 99999 # must be 0-65535
+      }
+    }
+  }
+
+  expect_failures = [var.records]
+}
+
+run "rejects_port_out_of_range" {
+  command = plan
+
+  variables {
+    records = {
+      bad = {
+        domain_id   = 123
+        record_type = "SRV"
+        target      = "sip.example.com"
+        port        = 99999 # must be 0-65535
+      }
+    }
+  }
+
+  expect_failures = [var.records]
+}
