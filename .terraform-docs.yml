@@ -16,3 +16,10 @@ output:
 sort:
   enabled: true
   by: required
+
+# Ignore a local .terraform.lock.hcl (gitignored, not committed).
+# Otherwise a dev who ran `terraform init` bakes the resolved provider
+# version into the Providers table, while the lock-free CI run emits
+# "n/a" — failing the terraform-docs gate. Keeps output deterministic.
+settings:
+  lockfile: false
