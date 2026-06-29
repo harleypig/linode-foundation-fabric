@@ -60,3 +60,72 @@ run "rejects_srv_with_name" {
 
   expect_failures = [var.records]
 }
+
+run "rejects_invalid_record_type" {
+  command = plan
+
+  variables {
+    records = {
+      bad = {
+        domain_id   = 123
+        record_type = "WRONG" # not a valid Linode record type
+        target      = "192.0.2.1"
+      }
+    }
+  }
+
+  expect_failures = [var.records]
+}
+
+run "rejects_empty_target" {
+  command = plan
+
+  variables {
+    records = {
+      bad = {
+        domain_id   = 123
+        record_type = "A"
+        target      = "" # must be non-empty
+      }
+    }
+  }
+
+  expect_failures = [var.records]
+}
+
+run "rejects_priority_out_of_range" {
+  command = plan
+
+  variables {
+    records = {
+      bad = {
+        domain_id   = 123
+        record_type = "MX"
+        target      = "mail.example.com"
+        priority    = 999 # must be 0-255
+      }
+    }
+  }
+
+  expect_failures = [var.records]
+}
+
+run "valid_with_omitted_ttl" {
+  command = plan
+
+  variables {
+    records = {
+      ok = {
+        domain_id   = 123
+        record_type = "A"
+        target      = "192.0.2.1"
+        # ttl_sec omitted -> null -> accepted (null-safe)
+      }
+    }
+  }
+
+  assert {
+    condition     = length(linode_domain_record.domain_records) == 1
+    error_message = "a record with omitted ttl_sec should plan"
+  }
+}

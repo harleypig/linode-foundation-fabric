@@ -2,9 +2,8 @@
 # real infrastructure; mock_provider satisfies provider config so no Linode
 # token is needed. Run: terraform -chdir=tfmods/linode_domain test
 #
-# Note: the *_sec fields are `optional` but each is validated against a fixed
-# allowed-values set, so valid input must supply all four (an omitted field is
-# null and fails `contains(...)`). These tests reflect that actual behavior.
+# Note: the *_sec fields are `optional` and null-safe — an omitted field (null)
+# is accepted; a non-null value must be one of the allowed Linode intervals.
 
 mock_provider "linode" {}
 
@@ -61,6 +60,55 @@ run "rejects_invalid_refresh_sec" {
         retry_sec   = 300
         expire_sec  = 300
         refresh_sec = 12345 # not in the allowed set
+      }
+    }
+  }
+
+  expect_failures = [var.domains]
+}
+
+run "valid_with_omitted_sec" {
+  command = plan
+
+  variables {
+    domains = {
+      "example.com" = {
+        domain    = "example.com"
+        soa_email = "admin@example.com"
+        # *_sec omitted -> null -> accepted (null-safe)
+      }
+    }
+  }
+
+  assert {
+    condition     = length(linode_domain.domains) == 1
+    error_message = "a domain with omitted *_sec fields should plan"
+  }
+}
+
+run "rejects_bad_domain" {
+  command = plan
+
+  variables {
+    domains = {
+      bad = {
+        domain    = "not a domain"
+        soa_email = "admin@example.com"
+      }
+    }
+  }
+
+  expect_failures = [var.domains]
+}
+
+run "rejects_bad_soa_email" {
+  command = plan
+
+  variables {
+    domains = {
+      bad = {
+        domain    = "example.com"
+        soa_email = "not-an-email"
       }
     }
   }
