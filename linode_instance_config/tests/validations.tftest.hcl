@@ -88,3 +88,23 @@ run "rejects_bad_interface_purpose" {
 
   expect_failures = [var.interface]
 }
+
+run "rejects_device_with_disk_and_volume" {
+  command = plan
+
+  variables {
+    devices = [{ device_name = "sda", disk_id = 1, volume_id = 2 }] # not both
+  }
+
+  expect_failures = [var.devices]
+}
+
+run "rejects_vpc_interface_without_subnet" {
+  command = plan
+
+  variables {
+    interface = [{ purpose = "vpc" }] # vpc requires subnet_id
+  }
+
+  expect_failures = [var.interface]
+}

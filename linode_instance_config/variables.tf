@@ -96,6 +96,11 @@ variable "devices" {
     condition     = alltrue([for d in var.devices : contains(["sda", "sdb", "sdc", "sdd", "sde", "sdf", "sdg", "sdh"], d.device_name)])
     error_message = "Each device device_name must be one of sda..sdh."
   }
+
+  validation {
+    condition     = alltrue([for d in var.devices : !(d.disk_id != null && d.volume_id != null)])
+    error_message = "A device cannot set both disk_id and volume_id (a device references a disk or a volume, not both)."
+  }
 }
 
 variable "interface" {
@@ -116,5 +121,10 @@ variable "interface" {
   validation {
     condition     = alltrue([for i in var.interface : contains(["public", "vlan", "vpc"], i.purpose)])
     error_message = "Each interface purpose must be one of: public, vlan, vpc."
+  }
+
+  validation {
+    condition     = alltrue([for i in var.interface : i.purpose != "vpc" || i.subnet_id != null])
+    error_message = "A vpc interface requires subnet_id."
   }
 }
