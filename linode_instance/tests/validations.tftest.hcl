@@ -2,9 +2,10 @@
 # real infrastructure; mock_provider satisfies provider config so no Linode
 # token is needed. Run: terraform -chdir=tfmods/linode_instance test
 #
-# image is required for a valid plan: the provider ties swap_size, resize_disk,
-# and stackscript_data to image via RequiredWith, so a plan without image
-# errors.
+# The base variables set image for a realistic happy path. The module no longer
+# forces image: swap_size and resize_disk default to null (omitted from the
+# resource), so an image-less instance plans cleanly -- see
+# "plans_without_image".
 
 mock_provider "linode" {}
 
@@ -20,6 +21,26 @@ run "valid_instance_plans" {
   assert {
     condition     = linode_instance.instance.region == "us-central"
     error_message = "planned region should match the input"
+  }
+}
+
+run "plans_without_image" {
+  command = plan
+
+  # Mirror the servers/ caller, which passes null for every optional field it
+  # doesn't set: no image (so swap_size/resize_disk/stackscript_data default to
+  # null and the provider's RequiredWith(image) is not tripped), and null for
+  # the contains()-validated fields (which must accept null, not just their
+  # enum values).
+  variables {
+    image           = null
+    migration_type  = null
+    disk_encryption = null
+  }
+
+  assert {
+    condition     = linode_instance.instance.region == "us-central"
+    error_message = "an image-less instance with null optionals should plan cleanly"
   }
 }
 

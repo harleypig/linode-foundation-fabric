@@ -64,9 +64,9 @@ variable "placement_group_externally_managed" {
 }
 
 variable "resize_disk" {
-  description = "If true, changes in Linode type will attempt to upsize or downsize implicitly created disks."
+  description = "If true, changes in Linode type will attempt to upsize or downsize implicitly created disks. Null (the default) omits the field so it does not trip the provider's RequiredWith(image) constraint on image-less instances."
   type        = bool
-  default     = false
+  default     = null
 }
 
 variable "backups_enabled" {
@@ -93,7 +93,7 @@ variable "migration_type" {
   default     = "cold"
 
   validation {
-    condition     = contains(["warm", "cold"], var.migration_type)
+    condition     = var.migration_type == null || contains(["warm", "cold"], var.migration_type)
     error_message = "migration_type must be warm or cold."
   }
 }
@@ -115,7 +115,7 @@ variable "disk_encryption" {
   default     = "enabled"
 
   validation {
-    condition     = contains(["enabled", "disabled"], var.disk_encryption)
+    condition     = var.disk_encryption == null || contains(["enabled", "disabled"], var.disk_encryption)
     error_message = "disk_encryption must be enabled or disabled."
   }
 }
@@ -167,18 +167,18 @@ variable "stackscript_id" {
 }
 
 variable "stackscript_data" {
-  description = "An object containing responses to any User Defined Fields present in the StackScript being deployed to this Linode."
+  description = "An object containing responses to any User Defined Fields present in the StackScript being deployed to this Linode. Null (the default) omits the field; an empty map still trips the provider's RequiredWith(image) constraint, forcing image on every instance."
   type        = map(any)
-  default     = {}
+  default     = null
 }
 
 variable "swap_size" {
-  description = "The swap disk size for the newly-created Linode."
+  description = "The swap disk size for the newly-created Linode. Null (the default) lets the provider apply its own default (512MB) when deploying from an image, and omits the field otherwise so it does not trip the provider's RequiredWith(image) constraint."
   type        = number
-  default     = 512
+  default     = null
 
   validation {
-    condition     = var.swap_size >= 0
+    condition     = var.swap_size == null || var.swap_size >= 0
     error_message = "swap_size must be >= 0."
   }
 }
