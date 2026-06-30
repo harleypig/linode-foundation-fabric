@@ -1,0 +1,33 @@
+<!--
+Canonical README scaffold for a tfmods/<module>. Copy this file to the
+module directory as README.md, fill in every <PLACEHOLDER>, then run
+`bin/build-docs tfmods/<module>` to populate the table block between the
+TF_DOCS markers.
+
+KEEP the BEGIN_TF_DOCS / END_TF_DOCS markers exactly. terraform-docs injects
+the Requirements / Providers / Resources / Inputs / Outputs tables between
+them; everything OUTSIDE the markers is hand-written and preserved across
+regeneration. Delete this comment after copying.
+-->
+
+# Linode <Resource> Terraform Module
+
+<One or two sentences: what this module manages and the single resource it
+wraps. Note anything load-bearing a consumer must know up front.>
+
+## Usage
+
+```hcl
+module "<name>" {
+  source = "../tfmods/linode_<resource>"
+
+  # <required inputs, with realistic example values>
+}
+```
+
+<!-- BEGIN_TF_DOCS -->
+<!-- END_TF_DOCS -->
+
+## Notes
+
+- <Caveats, gotchas, related resources, or import notes a consumer needs.>
