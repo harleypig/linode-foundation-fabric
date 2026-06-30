@@ -67,13 +67,16 @@ module "volume" {
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.7 |
+| <a name="requirement_linode"></a> [linode](#requirement\_linode) | ~> 3.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_linode"></a> [linode](#provider\_linode) | n/a |
+| <a name="provider_linode"></a> [linode](#provider\_linode) | ~> 3.0 |
 
 ## Modules
 
