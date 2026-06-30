@@ -41,5 +41,7 @@ No modules.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_id"></a> [id](#output\_id) | The unique ID of this Instance Config. |
 <!-- END_TF_DOCS -->

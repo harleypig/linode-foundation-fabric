@@ -30,5 +30,7 @@ No modules.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_rdns_ids"></a> [rdns\_ids](#output\_rdns\_ids) | A map of RDNS keys to their respective Linode RDNS record IDs. |
 <!-- END_TF_DOCS -->

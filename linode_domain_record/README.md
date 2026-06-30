@@ -30,5 +30,7 @@ No modules.
 
 ## Outputs
 
-No outputs.
+| Name | Description |
+|------|-------------|
+| <a name="output_record_ids"></a> [record\_ids](#output\_record\_ids) | A map of record keys to their respective Linode domain record IDs. |
 <!-- END_TF_DOCS -->
