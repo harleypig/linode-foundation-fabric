@@ -68,6 +68,8 @@ module "volume" {
 ```
 
 <!-- BEGIN_TF_DOCS -->
+<!-- markdownlint-capture -->
+<!-- markdownlint-disable -->
 ## Requirements
 
 | Name | Version |
@@ -114,6 +116,7 @@ No modules.
 | <a name="output_size"></a> [size](#output\_size) | The size of the Volume in GB. |
 | <a name="output_status"></a> [status](#output\_status) | The status of the volume, indicating if it's active or if any action is needed. |
 | <a name="output_tags"></a> [tags](#output\_tags) | An array of tags applied to this object. |
+<!-- markdownlint-restore -->
 <!-- END_TF_DOCS -->
 
 ## Notes

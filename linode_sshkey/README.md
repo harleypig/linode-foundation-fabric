@@ -15,6 +15,8 @@ module "sshkey" {
 ```
 
 <!-- BEGIN_TF_DOCS -->
+<!-- markdownlint-capture -->
+<!-- markdownlint-disable -->
 ## Requirements
 
 | Name | Version |
@@ -53,6 +55,7 @@ No modules.
 | <a name="output_id"></a> [id](#output\_id) | The unique ID of this SSH key. |
 | <a name="output_label"></a> [label](#output\_label) | The label of the SSH key. |
 | <a name="output_ssh_key"></a> [ssh\_key](#output\_ssh\_key) | The public SSH key. |
+<!-- markdownlint-restore -->
 <!-- END_TF_DOCS -->
 
 ## Notes

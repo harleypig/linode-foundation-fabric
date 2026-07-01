@@ -1,4 +1,6 @@
 <!-- BEGIN_TF_DOCS -->
+<!-- markdownlint-capture -->
+<!-- markdownlint-disable -->
 ## Requirements
 
 | Name | Version |
@@ -33,4 +35,5 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_record_ids"></a> [record\_ids](#output\_record\_ids) | A map of record keys to their respective Linode domain record IDs. |
+<!-- markdownlint-restore -->
 <!-- END_TF_DOCS -->

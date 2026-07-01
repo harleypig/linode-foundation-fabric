@@ -12,6 +12,18 @@ formatter: markdown table
 output:
   file: README.md
   mode: inject
+  # Wrap the generated tables in a markdownlint capture/disable/restore block
+  # (INSIDE the BEGIN/END markers so it is regenerated in place — no
+  # duplication on re-runs). The tables are machine-generated and can't be
+  # hand-fixed, so exempt them from markdown lint; restore reinstates the
+  # normal config for the hand-written prose around the block.
+  template: |-
+    <!-- BEGIN_TF_DOCS -->
+    <!-- markdownlint-capture -->
+    <!-- markdownlint-disable -->
+    {{ .Content }}
+    <!-- markdownlint-restore -->
+    <!-- END_TF_DOCS -->
 
 sort:
   enabled: true

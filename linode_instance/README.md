@@ -1,4 +1,6 @@
 <!-- BEGIN_TF_DOCS -->
+<!-- markdownlint-capture -->
+<!-- markdownlint-disable -->
 ## Requirements
 
 | Name | Version |
@@ -61,4 +63,5 @@ No modules.
 | <a name="output_instance_ip_address"></a> [instance\_ip\_address](#output\_instance\_ip\_address) | The public IP address of the Linode instance. |
 | <a name="output_instance_private_ip_address"></a> [instance\_private\_ip\_address](#output\_instance\_private\_ip\_address) | The private IP address of the Linode instance, if enabled. |
 | <a name="output_instance_status"></a> [instance\_status](#output\_instance\_status) | The status of the Linode instance. |
+<!-- markdownlint-restore -->
 <!-- END_TF_DOCS -->

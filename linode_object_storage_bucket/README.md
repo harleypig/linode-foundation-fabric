@@ -33,6 +33,8 @@ module "state_bucket" {
   `docs/backend-storage.md`.
 
 <!-- BEGIN_TF_DOCS -->
+<!-- markdownlint-capture -->
+<!-- markdownlint-disable -->
 ## Requirements
 
 | Name | Version |
@@ -72,4 +74,5 @@ No modules.
 | <a name="output_label"></a> [label](#output\_label) | The label of the bucket. |
 | <a name="output_region"></a> [region](#output\_region) | The region (cluster) the bucket resides in. |
 | <a name="output_s3_endpoint"></a> [s3\_endpoint](#output\_s3\_endpoint) | The S3 endpoint URL for the bucket. |
+<!-- markdownlint-restore -->
 <!-- END_TF_DOCS -->

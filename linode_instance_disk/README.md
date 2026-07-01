@@ -1,4 +1,6 @@
 <!-- BEGIN_TF_DOCS -->
+<!-- markdownlint-capture -->
+<!-- markdownlint-disable -->
 ## Requirements
 
 | Name | Version |
@@ -45,4 +47,5 @@ No modules.
 | <a name="output_disk_encryption"></a> [disk\_encryption](#output\_disk\_encryption) | The disk encryption policy for this disk's parent instance. |
 | <a name="output_status"></a> [status](#output\_status) | A brief description of this Disk's current state. |
 | <a name="output_updated"></a> [updated](#output\_updated) | When this disk was last updated. |
+<!-- markdownlint-restore -->
 <!-- END_TF_DOCS -->

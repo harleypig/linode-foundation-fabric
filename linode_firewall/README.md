@@ -45,6 +45,8 @@ An empty `inbound` with the default `inbound_policy = "DROP"` blocks all
 inbound traffic — add one rule per class of traffic you want to allow.
 
 <!-- BEGIN_TF_DOCS -->
+<!-- markdownlint-capture -->
+<!-- markdownlint-disable -->
 ## Requirements
 
 | Name | Version |
@@ -96,6 +98,7 @@ No modules.
 | <a name="output_outbound_policy"></a> [outbound\_policy](#output\_outbound\_policy) | The default behavior for outbound traffic. |
 | <a name="output_status"></a> [status](#output\_status) | The status of the Firewall (e.g. enabled, disabled). |
 | <a name="output_tags"></a> [tags](#output\_tags) | An array of tags applied to this object. |
+<!-- markdownlint-restore -->
 <!-- END_TF_DOCS -->
 
 ## Notes

@@ -1,4 +1,6 @@
 <!-- BEGIN_TF_DOCS -->
+<!-- markdownlint-capture -->
+<!-- markdownlint-disable -->
 ## Requirements
 
 | Name | Version |
@@ -33,4 +35,5 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_domain_ids"></a> [domain\_ids](#output\_domain\_ids) | A map of domain names to their respective Linode domain IDs. |
+<!-- markdownlint-restore -->
 <!-- END_TF_DOCS -->

@@ -1,4 +1,6 @@
 <!-- BEGIN_TF_DOCS -->
+<!-- markdownlint-capture -->
+<!-- markdownlint-disable -->
 ## Requirements
 
 | Name | Version |
@@ -41,4 +43,5 @@ No modules.
 | <a name="output_region"></a> [region](#output\_region) | The region this IP resides in. |
 | <a name="output_subnet_mask"></a> [subnet\_mask](#output\_subnet\_mask) | The mask that separates host bits from network bits for this address. |
 | <a name="output_type"></a> [type](#output\_type) | The type of IP address. (ipv4, ipv6, ipv6/pool, ipv6/range) |
+<!-- markdownlint-restore -->
 <!-- END_TF_DOCS -->

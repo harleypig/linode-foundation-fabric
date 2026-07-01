@@ -1,4 +1,6 @@
 <!-- BEGIN_TF_DOCS -->
+<!-- markdownlint-capture -->
+<!-- markdownlint-disable -->
 ## Requirements
 
 | Name | Version |
@@ -33,4 +35,5 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_rdns_ids"></a> [rdns\_ids](#output\_rdns\_ids) | A map of RDNS keys to their respective Linode RDNS record IDs. |
+<!-- markdownlint-restore -->
 <!-- END_TF_DOCS -->
