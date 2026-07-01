@@ -39,7 +39,7 @@ resource "linode_instance_config" "this" {
       primary      = lookup(interface.value, "primary", null)
 
       dynamic "ipv4" {
-        for_each = lookup(interface.value, "ipv4", []) != [] ? [interface.value.ipv4] : []
+        for_each = lookup(interface.value, "ipv4", null) != null ? [interface.value.ipv4] : []
         content {
           vpc     = lookup(ipv4.value, "vpc", null)
           nat_1_1 = lookup(ipv4.value, "nat_1_1", null)

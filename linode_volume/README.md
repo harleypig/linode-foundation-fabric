@@ -21,12 +21,14 @@ module "volume" {
 This module supports volume resizing by updating the `size` parameter.
 
 ### Restrictions
+
 - **Volumes can only be increased in size** - Linode does not support shrinking volumes
 - Minimum size: 10 GB
 - Maximum size: 10,240 GB (10 TB)
 - Resizing can be performed while the volume is attached and in use
 
 ### Filesystem Expansion
+
 **Note**: If using the golden image with automatic volume management, filesystem expansion is handled automatically. The system detects volume resizes and expands the filesystem without manual intervention.
 
 For manual expansion (if not using the golden image):
@@ -40,6 +42,7 @@ sudo xfs_growfs /mnt/volume-mount-point
 ```
 
 ### Resize Example
+
 ```hcl
 # Before
 module "volume" {
