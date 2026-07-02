@@ -7,7 +7,7 @@ This module creates and manages Linode volumes with optional attachment to insta
 ```hcl
 module "volume" {
   source = "./tfmods/linode_volume"
-  
+
   label     = "my-volume"
   size      = 50
   region    = "us-central"
@@ -47,7 +47,7 @@ sudo xfs_growfs /mnt/volume-mount-point
 # Before
 module "volume" {
   source = "./tfmods/linode_volume"
-  
+
   label = "my-volume"
   size  = 25  # GB
   region = "us-central"
@@ -56,11 +56,11 @@ module "volume" {
 # After - resize to 50 GB
 module "volume" {
   source = "./tfmods/linode_volume"
-  
+
   label = "my-volume"
   size  = 50  # Increased from 25 GB
   region = "us-central"
-  
+
   timeouts = {
     update = "15m"  # Optional: longer timeout for large resizes
   }

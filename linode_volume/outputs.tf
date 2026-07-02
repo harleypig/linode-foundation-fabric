@@ -37,4 +37,3 @@ output "tags" {
   description = "An array of tags applied to this object."
   value       = linode_volume.this.tags
 }
-
