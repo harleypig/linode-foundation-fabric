@@ -29,17 +29,32 @@ One module per Linode resource, `modules/<resource>/`:
 
 ```text
 modules/linode_<resource>/
-  main.tf         # the single resource, for_each over the input map
+  main.tf         # the resource (see the two interface shapes below)
   variables.tf    # inputs + validation blocks (become the test failure cases)
-  outputs.tf      # computed results exposed as maps keyed by the input key
+  outputs.tf      # computed results (scalars, or maps keyed by the input key)
   provider.tf     # required_version + required_providers (linode) — self-contained
   README.md       # terraform-docs-generated tables + hand-written prose
   tests/*.tftest.hcl  # plan-only native tests
 ```
 
-**Factory interface.** Each module takes a `map(object({...}))` input and
-`for_each`es the resource over it, so one module instance manages many
-resources; outputs are maps keyed by the same input key.
+**Two interface shapes — chosen by the resource, not for uniformity.** A
+module uses whichever fits how its resource is actually declared and composed;
+mixing the two across the library is deliberate, not drift (see the
+`TODO.md` examination for the full rationale).
+
+- **Factory** (`linode_domain`, `linode_domain_record`, `linode_rdns`) — the
+  module takes a `map(object({...}))` and `for_each`es the resource internally,
+  so one module instance manages many; outputs are maps keyed by the input key.
+  Right for **bulk-collection** resources (a zone's records) with no
+  cross-module interdependency. The caller passes the whole map and does **not**
+  `for_each` the module.
+- **Single-resource** (everything else — `linode_instance`, `linode_volume`,
+  `linode_firewall`, …) — the module manages **one** resource with scalar/list
+  inputs (lists being that resource's own sub-blocks: rules, devices, tags) and
+  **scalar outputs**. The **caller** composes with its own `for_each`
+  (`module.servers["web"].instance_id`) and cross-references the scalar outputs
+  between calls. Preferred when the resource has rich interdependencies or is
+  composed with sibling resources.
 
 **Each module carries its own `provider.tf`** (a copy of the root `provider.tf`
 template: `required_version` + the pinned `linode` provider), so a module stays

@@ -9,31 +9,37 @@ note was stale; the thin modules (`linode_sshkey`, `linode_instance_ip`,
 `linode_object_storage_bucket`, `linode_rdns`) are thin because their remaining
 inputs are bools/numbers that need no regex, not because of gaps.
 
-The two remaining hygiene items are **deferred until after the harleydev
-cutover** because both are entangled with the variable-shape change, which is
-breaking:
+**Consistent variable shape — EXAMINED, NOT DOING the blanket reshape**
+(2026-07-04). The old item proposed forcing every module onto the
+`map(object)` factory shape. Examined against how the modules are actually
+built and consumed; the mixed shapes are *correct*, reflecting a real semantic
+split rather than drift:
 
-- [ ] **Adopt a consistent variable shape** (`map(object)` factory with heavy
-  `optional()`; maps over lists). Today the shapes are mixed — 3 modules use
-  the `map(object)` factory (`linode_domain`, `linode_domain_record`,
-  `linode_rdns`), 6 use `list(...)`, 3 use scalars. **This is a breaking
-  module-interface change**: it forces harleydev's module calls to change and
-  would make its `terraform plan` no longer a clean no-op, so it must NOT
-  precede the drift-free cutover. Do it as a coordinated major bump with
-  harleydev updated in lockstep.
+- **Factory modules (3):** `linode_domain`, `linode_domain_record`,
+  `linode_rdns` take a `map(object)` and `for_each` the resource internally;
+  outputs are maps keyed by the input key. Right for **bulk-collection**
+  resources (a zone's records) with no cross-module interdependency and simple
+  map outputs — the caller passes the whole set and does *not* `for_each` the
+  module.
+- **Single-resource modules (9):** `linode_instance`, `linode_volume`,
+  `linode_volume_protected`, `linode_firewall`, `linode_instance_config`,
+  `linode_instance_disk`, `linode_instance_ip`, `linode_sshkey`,
+  `linode_object_storage_bucket` manage **one** resource with scalar/list
+  inputs and **scalar outputs** (`instance_id`, `instance_ip_address`, …). The
+  caller composes with its own `for_each` (harleydev: `module.servers["web"]`,
+  8 of 11 call sites) and cross-references the scalar outputs between calls
+  (`instance_configs`/`instance_disks`/`instance_ips` → `module.servers[k]`).
+
+Forcing the 9 single-resource modules into factories would be **wrong, not
+just costly**: their `list`/scalar inputs (`tags`, `authorized_keys`,
+`inbound`/`outbound` rules, `devices`, `interface`) are *sub-components of one
+resource* in the Linode API's own shape — a `map` of tags is nonsensical — and
+their scalar outputs would all become maps, forcing every caller reference and
+the whole (just-completed, drift-free) harleydev consumption to change for zero
+benefit. The one genuine defect was that `CONVENTIONS.md` described the library
+as *uniformly* factory; this PR corrects the doc to describe both patterns and
+when each applies.
+
 - [ ] **Add an `examples/` per module that doubles as a `.tftest.hcl`
-  fixture.** **Coupled to the reshape above** — the examples-as-fixtures
-  pattern should be built on the final unified shape, so building it now
-  (against the soon-to-change shapes) is largely rework (9 of 12 modules would
-  be redone). Do it alongside the reshape.
-
-## harleydev cutover (coordinated, production-sensitive)
-
-- [ ] Repoint harleydev's `account/`, `domains/`, `servers/`, `volumes/`
-  configs from `source = "../tfmods/<m>"` to
-  `github.com/harleypig/linode-foundation-fabric//modules/<m>?ref=vX.Y.Z`,
-  then remove `harleydev/tfmods/`. **Safety gate:** `. bin/set_env` +
-  `bin/tf all drift` (or `terraform plan`) must show **no changes** across
-  every config before/after — the extracted modules are byte-identical, so a
-  clean plan proves the cutover is inert. Runs against the live account, so it
-  is a credentialed step.
+  fixture.** Decoupled from the (rejected) reshape — build it on the *current*
+  shapes, so it is no longer rework. Standalone polish; low priority.
