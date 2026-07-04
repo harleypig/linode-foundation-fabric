@@ -8,7 +8,7 @@ traffic. The caller composes multiple nodes with its own `for_each`.
 
 ```hcl
 module "nodebalancer_node" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_nodebalancer_node?ref=v0.2.0"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_nodebalancer_node?ref=v1.0.0"
 
   nodebalancer_id = 12345
   config_id       = 67890

@@ -8,7 +8,7 @@ provisioning.
 
 ```hcl
 module "stackscript" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_stackscript?ref=v0.2.0"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_stackscript?ref=v1.0.0"
 
   label       = "example-stackscript"
   description = "Installs and configures example software on first boot."

@@ -9,7 +9,7 @@ already exists on the account.
 
 ```hcl
 module "iam_user" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_iam_user?ref=v0.2.0"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_iam_user?ref=v1.0.0"
 
   username = "test-iam-user"
 

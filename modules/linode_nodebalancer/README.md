@@ -9,7 +9,7 @@ Backend listeners and nodes are declared separately via the
 
 ```hcl
 module "nodebalancer" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_nodebalancer?ref=v0.2.0"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_nodebalancer?ref=v1.0.0"
 
   label                = "web-lb"
   region               = "us-east"

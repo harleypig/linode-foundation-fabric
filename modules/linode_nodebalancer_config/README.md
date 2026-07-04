@@ -10,7 +10,7 @@ NodeBalancer itself is managed separately; supply its ID via
 
 ```hcl
 module "nodebalancer_config" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_nodebalancer_config?ref=v0.2.0"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_nodebalancer_config?ref=v1.0.0"
 
   nodebalancer_id = 12345
 

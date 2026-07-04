@@ -8,7 +8,7 @@ sensitive output; capture it on creation, as it cannot be retrieved later.
 
 ```hcl
 module "token" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_token?ref=v0.2.0"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_token?ref=v1.0.0"
 
   label  = "ci-automation"
   scopes = "linodes:read_write domains:read_only"

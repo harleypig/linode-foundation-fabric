@@ -8,7 +8,7 @@ optional autoscaling, taints, node labels, and firewall attachment.
 
 ```hcl
 module "lke_node_pool" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_lke_node_pool?ref=v0.2.0"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_lke_node_pool?ref=v1.0.0"
 
   cluster_id = 12345
   type       = "g6-standard-1"

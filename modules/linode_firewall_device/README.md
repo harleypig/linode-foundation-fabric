@@ -9,7 +9,7 @@ elsewhere and referenced here by ID.
 
 ```hcl
 module "firewall_device" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_firewall_device?ref=v0.2.0"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_firewall_device?ref=v1.0.0"
 
   firewall_id = 123456
   entity_id   = 654321

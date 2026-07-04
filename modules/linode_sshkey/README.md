@@ -8,7 +8,7 @@ generate keys — supply an existing public key.
 
 ```hcl
 module "sshkey" {
-  source  = "github.com/harleypig/linode-foundation-fabric//modules/linode_sshkey?ref=v0.2.0"
+  source  = "github.com/harleypig/linode-foundation-fabric//modules/linode_sshkey?ref=v1.0.0"
   label   = "harleypig-laptop"
   ssh_key = chomp(file("~/.ssh/id_ed25519.pub"))
 }

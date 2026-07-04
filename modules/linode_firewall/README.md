@@ -12,7 +12,7 @@ inbound unless a rule allows it) and `outbound_policy = "ACCEPT"`.
 
 ```hcl
 module "web_firewall" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_firewall?ref=v0.2.0"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_firewall?ref=v1.0.0"
 
   label   = "harleypig-com-web"
   linodes = [12345] # the instance(s) to govern

@@ -9,7 +9,7 @@ so a Linode account should have at most one instance of this resource.
 
 ```hcl
 module "account_settings" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_account_settings?ref=v0.2.0"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_account_settings?ref=v1.0.0"
 
   backups_enabled            = true
   network_helper             = true

@@ -8,7 +8,7 @@ multiple assignments with its own `for_each`.
 
 ```hcl
 module "placement_group_assignment" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_placement_group_assignment?ref=v0.2.0"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_placement_group_assignment?ref=v1.0.0"
 
   placement_group_id = 12345
   linode_id          = 67890

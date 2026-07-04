@@ -9,7 +9,7 @@ multi-region replication.
 
 ```hcl
 module "image" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_image?ref=v0.2.0"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_image?ref=v1.0.0"
 
   label     = "my-golden-image"
   linode_id = 12345

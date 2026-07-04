@@ -8,7 +8,7 @@ control-plane settings, and optional VPC/ACL configuration.
 
 ```hcl
 module "lke_cluster" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_lke_cluster?ref=v0.2.0"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_lke_cluster?ref=v1.0.0"
 
   label       = "prod-cluster"
   region      = "us-east"

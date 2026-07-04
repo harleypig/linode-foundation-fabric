@@ -10,7 +10,7 @@ of band.
 
 ```hcl
 module "state_bucket" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_object_storage_bucket?ref=v0.2.0"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_object_storage_bucket?ref=v1.0.0"
 
   region = "us-east-1"
   label  = "harleypig-terraform-state"

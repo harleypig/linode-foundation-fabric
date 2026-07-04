@@ -9,7 +9,7 @@ met.
 
 ```hcl
 module "monitor_alert_definition" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_monitor_alert_definition?ref=v0.2.0"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_monitor_alert_definition?ref=v1.0.0"
 
   label        = "high-cpu-usage"
   service_type = "linode"

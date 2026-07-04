@@ -8,7 +8,7 @@ itself must already exist; this resource governs only its network access.
 
 ```hcl
 module "database_access_controls" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_database_access_controls?ref=v0.2.0"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_database_access_controls?ref=v1.0.0"
 
   database_id   = 12345
   database_type = "mysql"

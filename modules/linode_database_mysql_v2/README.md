@@ -8,7 +8,7 @@ maintenance-window, VPC, and access-list options as validated inputs.
 
 ```hcl
 module "database_mysql_v2" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_database_mysql_v2?ref=v0.2.0"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_database_mysql_v2?ref=v1.0.0"
 
   label     = "app-mysql-db"
   engine_id = "mysql/8"

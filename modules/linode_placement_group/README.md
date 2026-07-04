@@ -8,7 +8,7 @@ region (for example, spreading them across hosts via an anti-affinity policy).
 
 ```hcl
 module "placement_group" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_placement_group?ref=v0.2.0"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_placement_group?ref=v1.0.0"
 
   label                = "web-tier-anti-affinity"
   region               = "us-east"

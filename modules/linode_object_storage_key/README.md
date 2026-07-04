@@ -9,7 +9,7 @@ scoped to specific buckets, or omit them for an unrestricted key.
 
 ```hcl
 module "object_storage_key" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_object_storage_key?ref=v0.2.0"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_object_storage_key?ref=v1.0.0"
 
   label = "my-app-storage-key"
 

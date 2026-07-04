@@ -8,7 +8,7 @@ public/VPC interfaces. It wraps a single `linode_firewall_settings` resource.
 
 ```hcl
 module "firewall_settings" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_firewall_settings?ref=v0.2.0"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_firewall_settings?ref=v1.0.0"
 
   default_firewall_ids = {
     linode           = 12345
