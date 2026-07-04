@@ -72,3 +72,11 @@ run "rejects_negative_stackscript_id" {
 
   expect_failures = [var.stackscript_id]
 }
+
+run "example_basic_plans" {
+  command = plan
+
+  module {
+    source = "./examples/basic"
+  }
+}

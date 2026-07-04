@@ -108,3 +108,11 @@ run "rejects_vpc_interface_without_subnet" {
 
   expect_failures = [var.interface]
 }
+
+run "example_basic_plans" {
+  command = plan
+
+  module {
+    source = "./examples/basic"
+  }
+}

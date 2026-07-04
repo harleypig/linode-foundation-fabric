@@ -40,6 +40,6 @@ benefit. The one genuine defect was that `CONVENTIONS.md` described the library
 as *uniformly* factory; this PR corrects the doc to describe both patterns and
 when each applies.
 
-- [ ] **Add an `examples/` per module that doubles as a `.tftest.hcl`
-  fixture.** Decoupled from the (rejected) reshape — build it on the *current*
-  shapes, so it is no longer rework. Standalone polish; low priority.
+- [x] **Add an `examples/` per module that doubles as a `.tftest.hcl`
+  fixture.** Each module now ships `examples/basic/`, plan-tested by an
+  `example_basic_plans` run in its `tests/validations.tftest.hcl`.

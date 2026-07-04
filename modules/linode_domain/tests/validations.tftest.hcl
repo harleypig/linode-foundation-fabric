@@ -147,3 +147,11 @@ run "rejects_bad_tag" {
 
   expect_failures = [var.domains]
 }
+
+run "example_basic_plans" {
+  command = plan
+
+  module {
+    source = "./examples/basic"
+  }
+}
