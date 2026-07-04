@@ -1,7 +1,7 @@
 # Plan-only tests for the linode_instance_config module. command = plan never
 # creates real infrastructure; mock_provider satisfies provider config so no
 # Linode token is needed. Run:
-# terraform -chdir=tfmods/linode_instance_config test
+# terraform -chdir=modules/linode_instance_config test
 
 mock_provider "linode" {}
 

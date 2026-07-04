@@ -6,7 +6,7 @@ This module creates and manages Linode volumes with optional attachment to insta
 
 ```hcl
 module "volume" {
-  source = "./tfmods/linode_volume"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_volume?ref=v0.2.0"
 
   label     = "my-volume"
   size      = 50
@@ -46,7 +46,7 @@ sudo xfs_growfs /mnt/volume-mount-point
 ```hcl
 # Before
 module "volume" {
-  source = "./tfmods/linode_volume"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_volume?ref=v0.2.0"
 
   label = "my-volume"
   size  = 25  # GB
@@ -55,7 +55,7 @@ module "volume" {
 
 # After - resize to 50 GB
 module "volume" {
-  source = "./tfmods/linode_volume"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_volume?ref=v0.2.0"
 
   label = "my-volume"
   size  = 50  # Increased from 25 GB

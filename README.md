@@ -3,12 +3,11 @@
 Reusable, single-resource Terraform modules for [Linode][ln] — a "foundation
 fabric" (Cloud Foundation Fabric-style) library built on the published
 [`linode/linode`][prov] provider. Each module wraps one Linode resource with
-validated inputs, a factory `for_each` interface, and plan-only tests.
+validated inputs and plan-only tests.
 
-Extracted from [harleydev][hd]'s `tfmods/` (history preserved). This repo is
-**generic and reusable**; it holds no account-specific configuration. It is
-consumed by git ref from a root configuration (for example, harleydev, which
-manages the live account).
+This library is **generic and reusable**; it holds no account-specific
+configuration. It is consumed by git ref (`?ref=vX.Y.Z`) from a root
+configuration that manages the live account.
 
 ## Modules
 
@@ -73,7 +72,9 @@ module "volumes" {
 
 - **Terraform >= 1.7**.
 - The **`linode/linode`** provider (`~> 3.0`) — published on the Terraform
-  Registry, so no special setup is needed; `terraform init` fetches it.
+  Registry, so no special setup is needed; `terraform init` fetches it. This
+  branch is authored and tested against provider version **3.14.1** (the
+  latest 3.x release).
 
 ## Development
 
@@ -90,4 +91,3 @@ See [`.claude/TESTS.md`](.claude/TESTS.md).
 
 [ln]: https://www.linode.com
 [prov]: https://registry.terraform.io/providers/linode/linode/latest
-[hd]: https://github.com/harleypig/harleydev

@@ -1,6 +1,6 @@
 # Plan-only tests for the linode_domain module. command = plan never creates
 # real infrastructure; mock_provider satisfies provider config so no Linode
-# token is needed. Run: terraform -chdir=tfmods/linode_domain test
+# token is needed. Run: terraform -chdir=modules/linode_domain test
 #
 # Note: the *_sec fields are `optional` and null-safe — an omitted field (null)
 # is accepted; a non-null value must be one of the allowed Linode intervals.

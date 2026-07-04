@@ -1,6 +1,6 @@
 # Plan-only tests for the linode_firewall module. command = plan never creates
 # real infrastructure; mock_provider satisfies provider config so no Linode
-# token is needed. Run: terraform -chdir=tfmods/linode_firewall test
+# token is needed. Run: terraform -chdir=modules/linode_firewall test
 
 mock_provider "linode" {}
 

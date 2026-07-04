@@ -1,6 +1,6 @@
 # Plan-only tests for the linode_sshkey module. command = plan never creates
 # real infrastructure; mock_provider satisfies provider config so no Linode
-# token is needed. Run: terraform -chdir=tfmods/linode_sshkey test
+# token is needed. Run: terraform -chdir=modules/linode_sshkey test
 
 mock_provider "linode" {}
 
