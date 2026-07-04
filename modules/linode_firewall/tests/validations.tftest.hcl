@@ -164,3 +164,11 @@ run "rejects_negative_nodebalancer_id" {
 
   expect_failures = [var.nodebalancers]
 }
+
+run "example_basic_plans" {
+  command = plan
+
+  module {
+    source = "./examples/basic"
+  }
+}

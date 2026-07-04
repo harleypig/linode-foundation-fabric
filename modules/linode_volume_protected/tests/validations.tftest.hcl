@@ -91,3 +91,11 @@ run "rejects_bad_timeout_format" {
 
   expect_failures = [var.timeouts]
 }
+
+run "example_basic_plans" {
+  command = plan
+
+  module {
+    source = "./examples/basic"
+  }
+}

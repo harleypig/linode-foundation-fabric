@@ -37,3 +37,11 @@ run "rejects_bad_ssh_key" {
 
   expect_failures = [var.ssh_key]
 }
+
+run "example_basic_plans" {
+  command = plan
+
+  module {
+    source = "./examples/basic"
+  }
+}

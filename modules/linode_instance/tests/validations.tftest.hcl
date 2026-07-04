@@ -143,3 +143,11 @@ run "rejects_negative_alert" {
 
   expect_failures = [var.alerts]
 }
+
+run "example_basic_plans" {
+  command = plan
+
+  module {
+    source = "./examples/basic"
+  }
+}

@@ -36,3 +36,11 @@ run "rejects_bad_rdns" {
 
   expect_failures = [var.rdns]
 }
+
+run "example_basic_plans" {
+  command = plan
+
+  module {
+    source = "./examples/basic"
+  }
+}

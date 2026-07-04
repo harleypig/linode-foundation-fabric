@@ -163,3 +163,11 @@ run "rejects_port_out_of_range" {
 
   expect_failures = [var.records]
 }
+
+run "example_basic_plans" {
+  command = plan
+
+  module {
+    source = "./examples/basic"
+  }
+}

@@ -48,3 +48,11 @@ run "rejects_uppercase_label" {
 
   expect_failures = [var.label]
 }
+
+run "example_basic_plans" {
+  command = plan
+
+  module {
+    source = "./examples/basic"
+  }
+}

@@ -51,3 +51,11 @@ run "rejects_empty_hostname" {
 
   expect_failures = [var.rdns]
 }
+
+run "example_basic_plans" {
+  command = plan
+
+  module {
+    source = "./examples/basic"
+  }
+}
