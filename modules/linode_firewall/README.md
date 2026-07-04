@@ -12,7 +12,7 @@ inbound unless a rule allows it) and `outbound_policy = "ACCEPT"`.
 
 ```hcl
 module "web_firewall" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_firewall?ref=v1.0.0"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_firewall?ref=v2.0.0"
 
   label   = "harleypig-com-web"
   linodes = [12345] # the instance(s) to govern
@@ -52,13 +52,13 @@ inbound traffic — add one rule per class of traffic you want to allow.
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.7 |
-| <a name="requirement_linode"></a> [linode](#requirement\_linode) | ~> 3.0 |
+| <a name="requirement_linode"></a> [linode](#requirement\_linode) | ~> 4.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_linode"></a> [linode](#provider\_linode) | ~> 3.0 |
+| <a name="provider_linode"></a> [linode](#provider\_linode) | ~> 4.0 |
 
 ## Modules
 

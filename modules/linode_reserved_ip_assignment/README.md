@@ -8,7 +8,7 @@ already be reserved on the account before it can be assigned.
 
 ```hcl
 module "reserved_ip_assignment" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_reserved_ip_assignment?ref=v1.0.0"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_reserved_ip_assignment?ref=v2.0.0"
 
   address   = "192.0.2.10"
   linode_id = 123456
@@ -23,13 +23,13 @@ module "reserved_ip_assignment" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.7 |
-| <a name="requirement_linode"></a> [linode](#requirement\_linode) | ~> 3.0 |
+| <a name="requirement_linode"></a> [linode](#requirement\_linode) | ~> 4.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_linode"></a> [linode](#provider\_linode) | ~> 3.0 |
+| <a name="provider_linode"></a> [linode](#provider\_linode) | ~> 4.0 |
 
 ## Modules
 

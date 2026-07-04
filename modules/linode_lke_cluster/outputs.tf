@@ -38,11 +38,6 @@ output "api_endpoints" {
   value       = linode_lke_cluster.this.api_endpoints
 }
 
-output "dashboard_url" {
-  description = "The dashboard URL of the cluster."
-  value       = linode_lke_cluster.this.dashboard_url
-}
-
 output "pool" {
   description = "The node pools in the cluster, including computed node details."
   value       = linode_lke_cluster.this.pool

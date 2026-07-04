@@ -9,7 +9,7 @@ multi-region replication.
 
 ```hcl
 module "image" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_image?ref=v1.0.0"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_image?ref=v2.0.0"
 
   label     = "my-golden-image"
   linode_id = 12345
@@ -26,13 +26,13 @@ module "image" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.7 |
-| <a name="requirement_linode"></a> [linode](#requirement\_linode) | ~> 3.0 |
+| <a name="requirement_linode"></a> [linode](#requirement\_linode) | ~> 4.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_linode"></a> [linode](#provider\_linode) | ~> 3.0 |
+| <a name="provider_linode"></a> [linode](#provider\_linode) | ~> 4.0 |
 
 ## Modules
 

@@ -8,7 +8,7 @@ sensitive output; capture it on creation, as it cannot be retrieved later.
 
 ```hcl
 module "token" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_token?ref=v1.0.0"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_token?ref=v2.0.0"
 
   label  = "ci-automation"
   scopes = "linodes:read_write domains:read_only"
@@ -23,13 +23,13 @@ module "token" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.7 |
-| <a name="requirement_linode"></a> [linode](#requirement\_linode) | ~> 3.0 |
+| <a name="requirement_linode"></a> [linode](#requirement\_linode) | ~> 4.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_linode"></a> [linode](#provider\_linode) | ~> 3.0 |
+| <a name="provider_linode"></a> [linode](#provider\_linode) | ~> 4.0 |
 
 ## Modules
 

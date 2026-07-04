@@ -5,7 +5,6 @@ resource "linode_domain" "domains" {
   soa_email   = each.value.soa_email
   tags        = each.value.tags
   description = each.value.description
-  group       = each.value.group
   ttl_sec     = each.value.ttl_sec
   retry_sec   = each.value.retry_sec
   expire_sec  = each.value.expire_sec
