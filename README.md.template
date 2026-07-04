@@ -1,7 +1,7 @@
 <!--
-Canonical README scaffold for a tfmods/<module>. Copy this file to the
+Canonical README scaffold for a modules/<module>. Copy this file to the
 module directory as README.md, fill in every <PLACEHOLDER>, then run
-`bin/build-docs tfmods/<module>` to populate the table block between the
+`bin/build-docs modules/<module>` to populate the table block between the
 TF_DOCS markers.
 
 KEEP the BEGIN_TF_DOCS / END_TF_DOCS markers exactly. terraform-docs injects
@@ -19,7 +19,7 @@ wraps. Note anything load-bearing a consumer must know up front.>
 
 ```hcl
 module "<name>" {
-  source = "../tfmods/linode_<resource>"
+  source = "../modules/linode_<resource>"
 
   # <required inputs, with realistic example values>
 }

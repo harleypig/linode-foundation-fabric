@@ -1,0 +1,15 @@
+# Terraform working files — state lives in consumers; lockfiles are per-consumer.
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+*.tfplan
+
+# Editor / OS noise
+.DS_Store
+*~
+.*.swp
+.idea/
+*.iml

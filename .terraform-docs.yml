@@ -1,10 +1,10 @@
-# terraform-docs config for the reusable MODULES under tfmods/. These are meant
+# terraform-docs config for the reusable MODULES under modules/. These are meant
 # to be consumed, so their README shows the full Inputs/Outputs/Resources tables
 # (all sections, the default). The root working configs (domains/, servers/,
 # volumes/) use the repo-root .terraform-docs.yml instead (Modules section only).
 # bin/build-docs selects the right config per directory.
 #
-# Not recursive: tfmods/ holds flat, sibling modules (not a main module with a
+# Not recursive: modules/ holds flat, sibling modules (not a main module with a
 # modules/ subdir). bin/build-docs invokes terraform-docs once per module, so
 # recursion would only mis-document each module's tests/ dir as a submodule.
 formatter: markdown table
