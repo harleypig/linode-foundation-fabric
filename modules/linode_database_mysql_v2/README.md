@@ -8,7 +8,7 @@ maintenance-window, VPC, and access-list options as validated inputs.
 
 ```hcl
 module "database_mysql_v2" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_database_mysql_v2?ref=v1.0.0"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_database_mysql_v2?ref=v2.0.0"
 
   label     = "app-mysql-db"
   engine_id = "mysql/8"
@@ -25,13 +25,13 @@ module "database_mysql_v2" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.7 |
-| <a name="requirement_linode"></a> [linode](#requirement\_linode) | ~> 3.0 |
+| <a name="requirement_linode"></a> [linode](#requirement\_linode) | ~> 4.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_linode"></a> [linode](#provider\_linode) | ~> 3.0 |
+| <a name="provider_linode"></a> [linode](#provider\_linode) | ~> 4.0 |
 
 ## Modules
 

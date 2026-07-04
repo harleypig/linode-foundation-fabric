@@ -60,7 +60,7 @@ Each module under `modules/` wraps the Linode resource of the same name:
 
 ```hcl
 module "volumes" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_volume?ref=v1.0.0"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_volume?ref=v2.0.0"
 
   volumes = {
     data = { label = "data", region = "us-east", size = 20 }
@@ -71,10 +71,9 @@ module "volumes" {
 ## Requirements
 
 - **Terraform >= 1.7**.
-- The **`linode/linode`** provider (`~> 3.0`) — published on the Terraform
+- The **`linode/linode`** provider (`~> 4.0`) — published on the Terraform
   Registry, so no special setup is needed; `terraform init` fetches it. This
-  branch is authored and tested against provider version **3.14.1** (the
-  latest 3.x release).
+  branch is authored and tested against provider version **4.0.0**.
 
 ## Development
 

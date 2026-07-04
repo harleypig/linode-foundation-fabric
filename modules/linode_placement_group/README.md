@@ -8,7 +8,7 @@ region (for example, spreading them across hosts via an anti-affinity policy).
 
 ```hcl
 module "placement_group" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_placement_group?ref=v1.0.0"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_placement_group?ref=v2.0.0"
 
   label                = "web-tier-anti-affinity"
   region               = "us-east"
@@ -24,13 +24,13 @@ module "placement_group" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.7 |
-| <a name="requirement_linode"></a> [linode](#requirement\_linode) | ~> 3.0 |
+| <a name="requirement_linode"></a> [linode](#requirement\_linode) | ~> 4.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_linode"></a> [linode](#provider\_linode) | ~> 3.0 |
+| <a name="provider_linode"></a> [linode](#provider\_linode) | ~> 4.0 |
 
 ## Modules
 

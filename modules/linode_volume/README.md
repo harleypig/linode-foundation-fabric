@@ -6,7 +6,7 @@ This module creates and manages Linode volumes with optional attachment to insta
 
 ```hcl
 module "volume" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_volume?ref=v1.0.0"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_volume?ref=v2.0.0"
 
   label     = "my-volume"
   size      = 50
@@ -46,7 +46,7 @@ sudo xfs_growfs /mnt/volume-mount-point
 ```hcl
 # Before
 module "volume" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_volume?ref=v1.0.0"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_volume?ref=v2.0.0"
 
   label = "my-volume"
   size  = 25  # GB
@@ -55,7 +55,7 @@ module "volume" {
 
 # After - resize to 50 GB
 module "volume" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_volume?ref=v1.0.0"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_volume?ref=v2.0.0"
 
   label = "my-volume"
   size  = 50  # Increased from 25 GB
@@ -75,13 +75,13 @@ module "volume" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.7 |
-| <a name="requirement_linode"></a> [linode](#requirement\_linode) | ~> 3.0 |
+| <a name="requirement_linode"></a> [linode](#requirement\_linode) | ~> 4.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_linode"></a> [linode](#provider\_linode) | ~> 3.0 |
+| <a name="provider_linode"></a> [linode](#provider\_linode) | ~> 4.0 |
 
 ## Modules
 

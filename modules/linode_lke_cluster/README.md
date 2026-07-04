@@ -8,7 +8,7 @@ control-plane settings, and optional VPC/ACL configuration.
 
 ```hcl
 module "lke_cluster" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_lke_cluster?ref=v1.0.0"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_lke_cluster?ref=v2.0.0"
 
   label       = "prod-cluster"
   region      = "us-east"
@@ -31,13 +31,13 @@ module "lke_cluster" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.7 |
-| <a name="requirement_linode"></a> [linode](#requirement\_linode) | ~> 3.0 |
+| <a name="requirement_linode"></a> [linode](#requirement\_linode) | ~> 4.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_linode"></a> [linode](#provider\_linode) | ~> 3.0 |
+| <a name="provider_linode"></a> [linode](#provider\_linode) | ~> 4.0 |
 
 ## Modules
 
@@ -72,7 +72,6 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_api_endpoints"></a> [api\_endpoints](#output\_api\_endpoints) | The API endpoints for the cluster. |
-| <a name="output_dashboard_url"></a> [dashboard\_url](#output\_dashboard\_url) | The dashboard URL of the cluster. |
 | <a name="output_id"></a> [id](#output\_id) | The unique ID of this LKE cluster. |
 | <a name="output_k8s_version"></a> [k8s\_version](#output\_k8s\_version) | The Kubernetes version deployed for this cluster. |
 | <a name="output_kubeconfig"></a> [kubeconfig](#output\_kubeconfig) | The Base64-encoded Kubeconfig for the cluster. |

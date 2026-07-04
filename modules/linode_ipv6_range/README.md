@@ -8,7 +8,7 @@ This module creates and manages a Linode IPv6 range, assigning a routed /56 or
 
 ```hcl
 module "ipv6_range" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_ipv6_range?ref=v1.0.0"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_ipv6_range?ref=v2.0.0"
 
   prefix_length = 64
   linode_id     = 12345
@@ -23,13 +23,13 @@ module "ipv6_range" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.7 |
-| <a name="requirement_linode"></a> [linode](#requirement\_linode) | ~> 3.0 |
+| <a name="requirement_linode"></a> [linode](#requirement\_linode) | ~> 4.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_linode"></a> [linode](#provider\_linode) | ~> 3.0 |
+| <a name="provider_linode"></a> [linode](#provider\_linode) | ~> 4.0 |
 
 ## Modules
 

@@ -7,7 +7,6 @@ variable "domains" {
 
     description = optional(string)
     expire_sec  = optional(number)
-    group       = optional(string)
     refresh_sec = optional(number)
     retry_sec   = optional(number)
     status      = optional(string)
