@@ -10,4 +10,8 @@
 
 ## Module coverage
 
-- [ ] Add the remaining Linode resource modules not yet covered by the library.
+- [x] Add the remaining Linode resource modules not yet covered by the library.
+  Added 28 modules against provider 3.14.1 (full resource parity except 5
+  deliberately-skipped niche resources: `object_storage_object`, `lock`,
+  `consumer_image_share_group_token`, `producer_image_share_group`,
+  `producer_image_share_group_member`).
