@@ -8,20 +8,17 @@ specific to **this** repo and overrides the global config where they differ.
 linode-foundation-fabric is a **generic, reusable** Terraform module library
 (Cloud Foundation Fabric-style) for Linode, built on the published
 [`linode/linode`](https://registry.terraform.io/providers/linode/linode/latest)
-provider. It was **extracted from harleydev's `tfmods/`** (history preserved).
-It holds **no account-specific configuration** — that lives in the consuming
-root config (harleydev). One clean, validated, tested module per Linode
+provider. It holds **no account-specific configuration** — that lives in the
+consuming root configuration. One clean, validated, tested module per Linode
 resource.
 
-## Relationship to harleydev
+## Relationship to consumers
 
-- **harleydev** is the live-account root config that **consumes** this library
-  by pinned git ref (`?ref=vX.Y.Z`). Extraction is coordinated: harleydev's
-  `account/`, `domains/`, `servers/`, `volumes/` configs source these modules,
-  so a cutover repoints those `source` lines and is drift-gated (a clean
-  `terraform plan` proves the byte-identical modules changed nothing).
+- A root configuration **consumes** this library by pinned git ref
+  (`?ref=vX.Y.Z`): its configs `source` these modules and bump the ref to adopt
+  a new release.
 - **The provider is HashiCorp/Linode's** (`linode/linode`, on the Registry) —
-  there is no first-party provider repo here, unlike the mxroute fabric.
+  there is no first-party provider repo for this library.
 
 ## Module layout
 
@@ -65,7 +62,7 @@ new module.
 
 Uses a **locally installed `terraform`** (CI uses `setup-terraform`). The
 `linode/linode` provider is **published**, so `terraform init` fetches it from
-the Registry — **no dev-override** (unlike the mxroute fabric). Tests are
+the Registry — **no dev-override**. Tests are
 plan-only with `mock_provider`, so `init` needs no Linode credentials (it only
 downloads the provider schema).
 
@@ -106,7 +103,7 @@ N/A. For the Terraform stack, qa-check composes **terraform-review**.
 | 5 | Security | **Active** | `trivy config` (terraform misconfig) gated. Secrets: `gitleaks` + `detect-private-key` Active. |
 | 6 | Tests | **Active** | Plan-only `.tftest.hcl` per module (`mock_provider`, credential-free). See `TESTS.md`. |
 | 7 | UI/UX | **N/A** | No UI. |
-| 8 | End-to-end | **N/A** | The consuming root config (harleydev) owns real-infra testing. |
+| 8 | End-to-end | **N/A** | The consuming root configuration owns real-infra testing. |
 | 9 | Compatibility | **N/A** | Single provider. |
 | 10 | Performance | **N/A** | Config repo. |
 | 11 | Reliability | **N/A** | No runtime. |

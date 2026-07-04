@@ -2,16 +2,15 @@
 
 Creates and manages a single Linode Object Storage bucket.
 
-It has **no consumer in this repo yet** — the Terraform state bucket itself is
-created out of band by `bin/setup-bucket` (a state bucket can't be managed by a
-config whose state lives inside it; see `docs/backend-storage.md`). This module
-is retained for future Object Storage needs (Track C).
+Note that a bucket used to hold a Terraform state backend cannot be managed by
+the same configuration whose state lives inside it — provision that bucket out
+of band.
 
 ## Usage
 
 ```hcl
 module "state_bucket" {
-  source = "../tfmods/linode_object_storage_bucket"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_object_storage_bucket?ref=v1.0.0"
 
   region = "us-east-1"
   label  = "harleypig-terraform-state"
@@ -26,11 +25,9 @@ module "state_bucket" {
   modules' region list (`us-east`, …) does **not** apply here.
 - **Private by default.** The bucket inherits the provider's default `private`
   ACL — appropriate for a state bucket. Versioning, lifecycle rules, and other
-  hardening are intentionally out of scope here; they are tracked under the
-  security-hardening roadmap track (see `docs/ROADMAP.md`).
+  hardening are intentionally out of scope for this module.
 - **Authentication.** Bucket operations authenticate with an Object Storage
-  access key (separate from the Linode API token); see
-  `docs/backend-storage.md`.
+  access key (separate from the Linode API token).
 
 <!-- BEGIN_TF_DOCS -->
 <!-- markdownlint-capture -->

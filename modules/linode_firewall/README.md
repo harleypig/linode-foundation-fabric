@@ -12,7 +12,7 @@ inbound unless a rule allows it) and `outbound_policy = "ACCEPT"`.
 
 ```hcl
 module "web_firewall" {
-  source = "./tfmods/linode_firewall"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_firewall?ref=v1.0.0"
 
   label   = "harleypig-com-web"
   linodes = [12345] # the instance(s) to govern
@@ -111,10 +111,5 @@ No modules.
   attributes. For independent device lifecycle management, Linode also offers a
   separate `linode_firewall_device` resource; this module manages devices
   inline (one resource per module, per the repo convention).
-- **Not currently applied to production.** `harleypig-com` is a single host and
-  Linode's default firewall is sufficient for it, so no custom firewall is
-  deployed today. This module exists so a least-privilege firewall can be stood
-  up immediately when the topology grows (more hosts, a NodeBalancer, or
-  services needing tighter ingress). See `docs/ROADMAP.md` (Track A).
 - Tests are plan-only (`tests/validations.tftest.hcl`, `mock_provider`): they
   need no Linode token and create no infrastructure.

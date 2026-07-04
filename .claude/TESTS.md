@@ -9,7 +9,7 @@ Every module has `tests/*.tftest.hcl` using Terraform's native `terraform test`
 framework, **plan-only** (`command = plan`) with `mock_provider "linode" {}`.
 This needs **no Linode credentials** and creates **no real infrastructure** —
 it is what gates `master`. Real-infrastructure testing is the consuming root
-config's job (harleydev), not this library's.
+configuration's job, not this library's.
 
 `terraform init` fetches the `linode/linode` provider schema from the Registry
 (no token — a plain provider download). `mock_provider` then supplies behavior,
@@ -38,11 +38,11 @@ done
 ## Safety
 
 - **`command = plan` only.** No real resources, no cost, no credentials.
-- This library never targets live infrastructure; the consuming root config
-  (harleydev) guards that.
+- This library never targets live infrastructure; the consuming root
+  configuration guards that.
 
 ## Coverage policy
 
 Cover the valid path **and** a failing case per validation; add a regression
 test with each bug fix (`testing.md`). Modules still missing validations are
-tracked in `TODO.md` (harleydev ROADMAP Track C, step 1).
+tracked in `TODO.md`.

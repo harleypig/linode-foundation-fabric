@@ -2,13 +2,13 @@
 
 Auto-loaded entry point for AI agents working in linode-foundation-fabric — a
 generic, reusable Terraform module library (CFF-style) for Linode, built on the
-published `linode/linode` provider and extracted from harleydev's `tfmods/`.
+published `linode/linode` provider.
 
 ## The few things to internalize first
 
 - **This is a library, not live infra.** It holds no account-specific config.
   Modules are validated and plan-tested here; real infrastructure is exercised
-  by the consuming root config (harleydev), never here.
+  by the consuming root configuration, never here.
 - **One module per Linode resource** (`modules/linode_<resource>/`), factory
   `for_each` interface; inputs mirror settable attributes, outputs the computed
   ones.
@@ -16,8 +16,8 @@ published `linode/linode` provider and extracted from harleydev's `tfmods/`.
   `terraform init` fetches it — no dev-override. Tests are credential-free
   (`mock_provider`, `command = plan`). See `TESTS.md`.
 - **`master` is PR-only.** Branch first; never commit on `master`.
-- **harleydev consumes this by pinned git ref.** A cutover that repoints
-  harleydev is coordinated and drift-gated (see `CONVENTIONS.md` and `TODO.md`).
+- **Consumers pin this by git ref** (`?ref=vX.Y.Z`) and bump the ref to adopt a
+  new release.
 
 ## Where the rest lives
 

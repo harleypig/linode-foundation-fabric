@@ -1,6 +1,6 @@
 # Plan-only tests for the linode_volume module. command = plan never creates
 # real infrastructure; mock_provider satisfies provider config so no Linode
-# token is needed. Run: terraform -chdir=tfmods/linode_volume test
+# token is needed. Run: terraform -chdir=modules/linode_volume test
 
 mock_provider "linode" {}
 

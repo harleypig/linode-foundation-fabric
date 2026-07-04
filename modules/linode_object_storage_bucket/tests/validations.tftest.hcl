@@ -1,7 +1,7 @@
 # Plan-only tests for the linode_object_storage_bucket module. command = plan
 # never creates real infrastructure; mock_provider satisfies provider config so
 # no Linode token is needed. Run:
-# terraform -chdir=tfmods/linode_object_storage_bucket test
+# terraform -chdir=modules/linode_object_storage_bucket test
 
 mock_provider "linode" {}
 

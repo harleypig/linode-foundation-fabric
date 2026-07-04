@@ -1,7 +1,7 @@
 # Plan-only tests for the linode_domain_record module. command = plan never
 # creates real infrastructure; mock_provider satisfies provider config so no
 # Linode token is needed (variable validations run regardless of provider —
-# see DEVELOPER.md / the repo QA doc). Run: terraform -chdir=tfmods/linode_domain_record test
+# see DEVELOPER.md / the repo QA doc). Run: terraform -chdir=modules/linode_domain_record test
 
 mock_provider "linode" {}
 

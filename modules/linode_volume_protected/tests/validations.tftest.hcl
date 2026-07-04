@@ -3,7 +3,7 @@
 # only affects destroy, which a plan-only create test does not exercise, so
 # the assertable behaviour is identical. command = plan never creates real
 # infrastructure; mock_provider satisfies provider config so no Linode token
-# is needed. Run: terraform -chdir=tfmods/linode_volume_protected test
+# is needed. Run: terraform -chdir=modules/linode_volume_protected test
 
 mock_provider "linode" {}
 

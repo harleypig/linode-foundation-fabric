@@ -1,6 +1,6 @@
 # Plan-only tests for the linode_instance module. command = plan never creates
 # real infrastructure; mock_provider satisfies provider config so no Linode
-# token is needed. Run: terraform -chdir=tfmods/linode_instance test
+# token is needed. Run: terraform -chdir=modules/linode_instance test
 #
 # The base variables set image for a realistic happy path. The module no longer
 # forces image: swap_size and resize_disk default to null (omitted from the
