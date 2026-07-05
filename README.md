@@ -35,6 +35,7 @@ Each module under `modules/` wraps the Linode resource of the same name:
 | `linode_ipv6_range` | `linode_ipv6_range` |
 | `linode_lke_cluster` | `linode_lke_cluster` |
 | `linode_lke_node_pool` | `linode_lke_node_pool` |
+| `linode_lock` | `linode_lock` (early access — beta API) |
 | `linode_monitor_alert_definition` | `linode_monitor_alert_definition` |
 | `linode_networking_ip` | `linode_networking_ip` |
 | `linode_networking_ip_assignment` | `linode_networking_ip_assignment` |
