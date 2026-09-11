@@ -83,6 +83,13 @@ covers all modules. `v0.y.z` is alpha (breakage expected, loose `y.z`); the
 requires a major bump. Tags are **annotated**, cut at the merge commit on
 `master` (the **release-tag** skill). A consumer pins a module by `?ref=vX.Y.Z`.
 
+## Team-managed delegation
+
+`team-managed: enabled` — substantive edits (module code, docs, tests,
+`.claude/` rules) route through the appropriate role-subagent rather than
+the orchestrator editing directly. Advisory nudge only; see the global
+`team-managed-delegation.md` rule for the norm and its enforcement.
+
 ## Merge policy
 
 `master` is PR-only. Branch first; never commit on `master`. The local
