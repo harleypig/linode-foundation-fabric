@@ -57,6 +57,19 @@ variable "shared_ipv4" {
   default     = []
 }
 
+variable "ipv4" {
+  description = "Reserved IPv4 addresses to assign to the Linode at creation. Null (the default) omits the argument and Linode assigns an address as before. Changing it forces replacement; see the README."
+  type        = set(string)
+  default     = null
+
+  validation {
+    condition = var.ipv4 == null || alltrue([
+      for ip in var.ipv4 : can(regex("^(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])(\\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])){3}$", ip))
+    ])
+    error_message = "Each ipv4 entry must be a bare IPv4 address (e.g. 192.0.2.25), with no prefix length."
+  }
+}
+
 variable "placement_group_externally_managed" {
   description = "If true, changes to the Linode's assigned Placement Group will be ignored."
   type        = bool

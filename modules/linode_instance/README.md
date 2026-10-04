@@ -1,3 +1,70 @@
+# Linode Instance Terraform Module
+
+This module creates and manages one Linode instance, wrapping the
+`linode_instance` resource.
+
+## Create-time reserved IPv4 (`ipv4`)
+
+`ipv4` passes the provider's `linode_instance.ipv4` argument through: "A set
+of reserved IPv4 addresses to assign to this Linode on creation", with the
+provider's note that "IP reservation is not currently available to all
+users". Leave it unset (the default, `null`) and the argument is omitted, so
+Linode assigns the instance's address exactly as before.
+
+```hcl
+module "reserved_ip" {
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_reserved_ip_protected?ref=v2.2.0"
+
+  region = "us-east"
+}
+
+module "instance" {
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_instance?ref=v2.2.0"
+
+  region = "us-east"
+  type   = "g6-nanode-1"
+  image  = "linode/ubuntu24.04"
+  ipv4   = [module.reserved_ip.address]
+}
+```
+
+The address must already be reserved, in the instance's region.
+
+### What is known
+
+- **Changing it forces replacement.** The provider schema marks `ipv4`
+  `ForceNew`. That includes setting it on an instance that already exists:
+  the plan replaces the instance. Set it when the instance is created, or
+  accept the replacement.
+- **The plan compares it against every IPv4 address on the instance.** On
+  read, the provider fills `ipv4` with all of the instance's IPv4 addresses.
+  If the instance holds any address you did not list (a private address from
+  `private_ip = true`, or one added later), the set differs from your
+  configuration and every plan proposes replacing the instance. List exactly
+  the addresses the instance holds, or leave `ipv4` unset.
+- **Unset is a no-op.** The argument is `Optional` and `Computed`, so an
+  unset `ipv4` never produces a diff, on new or existing instances.
+
+### What is not known
+
+- **Whether the reserved address replaces the auto-assigned one or is added
+  beside it.** Linode's published API reference (OpenAPI 4.215.0) does not
+  document `ipv4` on instance creation. The provider's own acceptance test
+  (`TestAccResourceInstance_withReservedIP`, v4.7.0) creates an instance with
+  one reserved address and asserts `ipv4` holds exactly one address, which
+  points to **replaces**. That is the provider's test, not a documented API
+  contract, and this library has not observed it on a real account. After
+  the first apply, check that the instance has only the addresses you
+  listed. If Linode also assigns its own address, the next plan proposes a
+  replacement (see above).
+- **Whether the address stays reserved when the instance is destroyed.** The
+  provider's acceptance test `TestAccResourceInstance_deleteWithReservedIP`
+  asserts that it does. Protect the reservation itself with
+  `linode_reserved_ip_protected` regardless.
+
+The `instance_ip_address` output is the first element of `ipv4`. With one
+reserved address and no other IPv4, that is the reserved address.
+
 <!-- BEGIN_TF_DOCS -->
 <!-- markdownlint-capture -->
 <!-- markdownlint-disable -->
@@ -39,6 +106,7 @@ No modules.
 | <a name="input_disk_encryption"></a> [disk\_encryption](#input\_disk\_encryption) | The disk encryption policy for this instance. | `string` | `"enabled"` | no |
 | <a name="input_firewall_id"></a> [firewall\_id](#input\_firewall\_id) | The ID of the Firewall to attach to the instance upon creation. | `string` | `null` | no |
 | <a name="input_image"></a> [image](#input\_image) | An Image ID to deploy the Disk from. | `string` | `null` | no |
+| <a name="input_ipv4"></a> [ipv4](#input\_ipv4) | Reserved IPv4 addresses to assign to the Linode at creation. Null (the default) omits the argument and Linode assigns an address as before. Changing it forces replacement; see the README. | `set(string)` | `null` | no |
 | <a name="input_label"></a> [label](#input\_label) | The Linode's label for display purposes. | `string` | `null` | no |
 | <a name="input_metadata"></a> [metadata](#input\_metadata) | The metadata configuration for the Linode instance. | <pre>object({<br/>    user_data = string<br/>  })</pre> | `null` | no |
 | <a name="input_migration_type"></a> [migration\_type](#input\_migration\_type) | The type of migration to use when updating the type or region of a Linode. | `string` | `"cold"` | no |

@@ -5,6 +5,7 @@ resource "linode_instance" "instance" {
   tags                               = var.tags
   private_ip                         = var.private_ip
   shared_ipv4                        = var.shared_ipv4
+  ipv4                               = var.ipv4
   image                              = var.image
   root_pass                          = var.root_pass
   authorized_keys                    = var.authorized_keys
