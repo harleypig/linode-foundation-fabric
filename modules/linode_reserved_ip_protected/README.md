@@ -1,19 +1,59 @@
-# Linode Reserved IP Terraform Module
+# Linode Reserved IP (Protected) Terraform Module
 
-This module reserves a single Linode IPv4 address in a region, wrapping the
-`linode_reserved_ip` resource. The address is not attached to a Linode until
-a separate assignment (see `linode_reserved_ip_assignment`) puts it there.
+The `prevent_destroy` variant of
+[`../linode_reserved_ip`](../linode_reserved_ip). It is identical to the base module in every input, output, and resource. The
+only difference is a `lifecycle { prevent_destroy = true }` guard on the
+reservation, so Terraform **refuses to destroy or replace it** and errors on
+any plan that would. Use it for an address that must survive: one that DNS
+points at, or that an instance is created on.
 
 ## Usage
 
 ```hcl
 module "reserved_ip" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_reserved_ip?ref=v2.0.0"
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_reserved_ip_protected?ref=v2.2.0"
 
   region = "us-east"
   tags   = ["prod", "web"]
 }
 ```
+
+## Why a separate module
+
+Terraform requires the `prevent_destroy` meta-argument to be a **literal**; a
+variable cannot set it, so one shared module cannot toggle protection per
+instance. A distinct module is the only way to express "this reservation is
+protected, that one is not". Keep `variables.tf`, `outputs.tf`, and
+`provider.tf` byte-identical to `../linode_reserved_ip` (a `diff` should be
+empty); only `main.tf` is meant to differ.
+
+## Protecting an existing reservation (state move)
+
+Switching a reservation that already exists in state from
+`linode_reserved_ip` to this module changes its resource address, which
+Terraform otherwise reads as destroy-and-recreate, and that would release the
+address. Add a `moved` block in the consuming configuration:
+
+```hcl
+moved {
+  from = module.reserved_ip.linode_reserved_ip.this
+  to   = module.reserved_ip_protected.linode_reserved_ip.this
+}
+```
+
+For a module called with `for_each`, give the instance key on both sides
+(`module.reserved_ip["web"].linode_reserved_ip.this`). Confirm with
+`terraform plan` that the result is a move with **0 to destroy** before
+applying.
+
+## Checking the guard
+
+The plan-only tests cannot reach `prevent_destroy`, which acts only on a
+destroy or replace. To see it work without touching an account, plan a
+destroy against a state that holds the reservation, with `-refresh=false` so
+the provider makes no API call: the base module plans `1 to destroy`, this
+module fails with `Error: Instance cannot be destroyed`. Changing `region`
+(which forces replacement) fails the same way.
 
 <!-- BEGIN_TF_DOCS -->
 <!-- markdownlint-capture -->
@@ -70,12 +110,8 @@ No modules.
 
 ## Notes
 
-- `region` is set at creation and cannot be changed in place — changing it
-  forces the reservation to be replaced.
-- `address`, `gateway`, `subnet_mask`, `prefix`, `type`, `public`, `rdns`,
-  `linode_id`, `reserved`, `vpc_nat_1_1`, and `assigned_entity` are computed
-  by Linode and exposed as outputs; `linode_id` and `assigned_entity` are set
-  only once the reservation has been assigned to a Linode.
-- This module has no `prevent_destroy` guard, so a plan that replaces or
-  removes it releases the address. For an address that must survive, use
-  [`../linode_reserved_ip_protected`](../linode_reserved_ip_protected).
+- Removing the module call, or a plan that would replace the reservation,
+  fails while the guard is in place. To release the address on purpose, move
+  it back to `linode_reserved_ip` with a `moved` block first.
+- See [`../linode_reserved_ip`](../linode_reserved_ip) for the computed
+  outputs and the `region` replacement behaviour; they are shared.
