@@ -1,3 +1,9 @@
+locals {
+  # An empty set is sent as null: [] reads as a change from the instance's
+  # current addresses and, ipv4 being ForceNew, would replace it.
+  ipv4 = length(coalesce(var.ipv4, [])) > 0 ? var.ipv4 : null
+}
+
 resource "linode_instance" "instance" {
   region                             = var.region
   type                               = var.type
@@ -5,6 +11,7 @@ resource "linode_instance" "instance" {
   tags                               = var.tags
   private_ip                         = var.private_ip
   shared_ipv4                        = var.shared_ipv4
+  ipv4                               = local.ipv4
   image                              = var.image
   root_pass                          = var.root_pass
   authorized_keys                    = var.authorized_keys

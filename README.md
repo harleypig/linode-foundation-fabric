@@ -47,6 +47,8 @@ Each module under `modules/` wraps the Linode resource of the same name:
 | `linode_placement_group` | `linode_placement_group` |
 | `linode_placement_group_assignment` | `linode_placement_group_assignment` |
 | `linode_rdns` | `linode_rdns` |
+| `linode_reserved_ip` | `linode_reserved_ip` |
+| `linode_reserved_ip_protected` | `linode_reserved_ip` (delete-protected) |
 | `linode_reserved_ip_assignment` | `linode_reserved_ip_assignment` |
 | `linode_sshkey` | `linode_sshkey` |
 | `linode_stackscript` | `linode_stackscript` |
