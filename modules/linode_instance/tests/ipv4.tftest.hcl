@@ -37,6 +37,22 @@ run "ipv4_unset_leaves_address_to_linode" {
   }
 }
 
+# An empty set must behave like null. Sent as-is, the provider reads [] as a
+# change from the instance's current addresses and, ipv4 being ForceNew,
+# plans a replacement of an existing instance.
+run "ipv4_empty_set_is_treated_as_unset" {
+  command = plan
+
+  variables {
+    ipv4 = []
+  }
+
+  assert {
+    condition     = linode_instance.instance.ipv4 == toset(["198.51.100.10"])
+    error_message = "an empty ipv4 set must be omitted like null, leaving the provider-computed value"
+  }
+}
+
 run "ipv4_set_passes_reserved_address_through" {
   command = plan
 

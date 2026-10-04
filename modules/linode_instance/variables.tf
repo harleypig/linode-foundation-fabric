@@ -58,7 +58,7 @@ variable "shared_ipv4" {
 }
 
 variable "ipv4" {
-  description = "Reserved IPv4 addresses to assign to the Linode at creation. Null (the default) omits the argument and Linode assigns an address as before. Changing it forces replacement; see the README."
+  description = "Reserved IPv4 addresses to assign to the Linode at creation. Null (the default) or an empty set omits the argument and Linode assigns an address as before. Changing it forces replacement; see the README."
   type        = set(string)
   default     = null
 

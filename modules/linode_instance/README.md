@@ -43,7 +43,9 @@ The address must already be reserved, in the instance's region.
   configuration and every plan proposes replacing the instance. List exactly
   the addresses the instance holds, or leave `ipv4` unset.
 - **Unset is a no-op.** The argument is `Optional` and `Computed`, so an
-  unset `ipv4` never produces a diff, on new or existing instances.
+  unset `ipv4` never produces a diff, on new or existing instances. The
+  module sends an empty set (`ipv4 = []`) as unset too: passed to the
+  provider as-is, `[]` reads as a change and replaces an existing instance.
 
 ### What is not known
 
@@ -106,7 +108,7 @@ No modules.
 | <a name="input_disk_encryption"></a> [disk\_encryption](#input\_disk\_encryption) | The disk encryption policy for this instance. | `string` | `"enabled"` | no |
 | <a name="input_firewall_id"></a> [firewall\_id](#input\_firewall\_id) | The ID of the Firewall to attach to the instance upon creation. | `string` | `null` | no |
 | <a name="input_image"></a> [image](#input\_image) | An Image ID to deploy the Disk from. | `string` | `null` | no |
-| <a name="input_ipv4"></a> [ipv4](#input\_ipv4) | Reserved IPv4 addresses to assign to the Linode at creation. Null (the default) omits the argument and Linode assigns an address as before. Changing it forces replacement; see the README. | `set(string)` | `null` | no |
+| <a name="input_ipv4"></a> [ipv4](#input\_ipv4) | Reserved IPv4 addresses to assign to the Linode at creation. Null (the default) or an empty set omits the argument and Linode assigns an address as before. Changing it forces replacement; see the README. | `set(string)` | `null` | no |
 | <a name="input_label"></a> [label](#input\_label) | The Linode's label for display purposes. | `string` | `null` | no |
 | <a name="input_metadata"></a> [metadata](#input\_metadata) | The metadata configuration for the Linode instance. | <pre>object({<br/>    user_data = string<br/>  })</pre> | `null` | no |
 | <a name="input_migration_type"></a> [migration\_type](#input\_migration\_type) | The type of migration to use when updating the type or region of a Linode. | `string` | `"cold"` | no |
