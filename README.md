@@ -27,6 +27,7 @@ Each module under `modules/` wraps the Linode resource of the same name:
 | `linode_iam_user` | `linode_iam_user` |
 | `linode_image` | `linode_image` |
 | `linode_instance` | `linode_instance` |
+| `linode_instance_protected` | `linode_instance` (delete-protected; create-time attributes ignored) |
 | `linode_instance_config` | `linode_instance_config` |
 | `linode_instance_disk` | `linode_instance_disk` |
 | `linode_instance_ip` | `linode_instance_ip` |

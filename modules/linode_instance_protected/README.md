@@ -1,77 +1,144 @@
-# Linode Instance Terraform Module
+# Linode Instance (Protected) Terraform Module
 
-This module creates and manages one Linode instance, wrapping the
-`linode_instance` resource.
+The protected variant of [`../linode_instance`](../linode_instance). Its
+inputs, outputs, and resource are the base module's; the only difference is
+a `lifecycle` block on the instance that does two things:
 
-It has no `lifecycle` guard. A change to a create-time attribute such as
-cloud-init `user_data` or `authorized_keys` replaces the instance, and a
-module call cannot add `prevent_destroy` or `ignore_changes`. For a server
-that must not be rebuilt by accident, use
-[`../linode_instance_protected`](../linode_instance_protected).
+- **`prevent_destroy = true`.** Terraform refuses any plan that would
+  destroy or replace the instance, and fails with
+  `Error: Instance cannot be destroyed`.
+- **`ignore_changes` on the create-time attributes.** A later change to
+  cloud-init `user_data`, the bootstrap SSH keys, the image, and the other
+  attributes listed below plans no change, instead of a replacement.
 
-## Create-time reserved IPv4 (`ipv4`)
+Use it for a server that must not be rebuilt by accident. A cloud-init
+document is read at first boot only, so editing it (a timezone, a new
+colleague's key) should never take a running server down, but the provider
+marks it `ForceNew`, and with the base module one `yes` deletes the server.
 
-`ipv4` passes the provider's `linode_instance.ipv4` argument through: "A set
-of reserved IPv4 addresses to assign to this Linode on creation", with the
-provider's note that "IP reservation is not currently available to all
-users". Leave it unset (the default, `null`) and the argument is omitted, so
-Linode assigns the instance's address exactly as before.
+## Usage
 
 ```hcl
-module "reserved_ip" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_reserved_ip_protected?ref=v2.2.0"
+module "web" {
+  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_instance_protected?ref=v2.3.0"
 
-  region = "us-east"
-}
-
-module "instance" {
-  source = "github.com/harleypig/linode-foundation-fabric//modules/linode_instance?ref=v2.2.0"
-
-  region = "us-east"
-  type   = "g6-nanode-1"
-  image  = "linode/ubuntu24.04"
-  ipv4   = [module.reserved_ip.address]
+  label           = "web-1"
+  region          = "us-east"
+  type            = "g6-standard-1"
+  image           = "linode/ubuntu24.04"
+  authorized_keys = [var.bootstrap_ssh_key]
+  metadata        = { user_data = local.cloud_init }
 }
 ```
 
-The address must already be reserved, in the instance's region.
+The inputs and outputs are the base module's; see
+[`../linode_instance`](../linode_instance) for them, and for what is known
+about the create-time `ipv4` argument.
 
-### What is known
+## What is ignored, and why
 
-- **Changing it forces replacement.** The provider schema marks `ipv4`
-  `ForceNew`. That includes setting it on an instance that already exists:
-  the plan replaces the instance. Set it when the instance is created, or
-  accept the replacement.
-- **The plan compares it against every IPv4 address on the instance.** On
-  read, the provider fills `ipv4` with all of the instance's IPv4 addresses.
-  If the instance holds any address you did not list (a private address from
-  `private_ip = true`, or one added later), the set differs from your
-  configuration and every plan proposes replacing the instance. List exactly
-  the addresses the instance holds, or leave `ipv4` unset.
-- **Unset is a no-op.** The argument is `Optional` and `Computed`, so an
-  unset `ipv4` never produces a diff, on new or existing instances. The
-  module sends an empty set (`ipv4 = []`) as unset too: passed to the
-  provider as-is, `[]` reads as a change and replaces an existing instance.
+Each attribute below is read once, when the instance and its boot disk are
+created, and is `ForceNew` in the `linode/linode` provider (v4.7.0,
+`linode/instance/schema_resource.go`). Changing it on a running server is
+never applied in place; the provider's only answer is a replacement.
 
-### What is not known
+| Attribute | Why it only matters at creation |
+|-----------|---------------------------------|
+| `metadata` (`user_data`) | cloud-init consumes it at first boot |
+| `authorized_keys` | written to root's `authorized_keys` when the disk is deployed |
+| `authorized_users` | the same, from those users' Linode profile keys |
+| `image` | the source of the boot disk at deploy |
+| `stackscript_id`, `stackscript_data` | the StackScript runs once, at deploy |
+| `backup_id` | the backup restored at creation |
+| `ipv4` | the address assigned at creation; the provider reads back every IPv4 the instance holds, so an address added later would otherwise force a replacement |
+| `firewall_id` | the firewall attached at creation; attach or move firewalls afterwards with `linode_firewall_device` |
 
-- **Whether the reserved address replaces the auto-assigned one or is added
-  beside it.** Linode's published API reference (OpenAPI 4.215.0) does not
-  document `ipv4` on instance creation. The provider's own acceptance test
-  (`TestAccResourceInstance_withReservedIP`, v4.7.0) creates an instance with
-  one reserved address and asserts `ipv4` holds exactly one address, which
-  points to **replaces**. That is the provider's test, not a documented API
-  contract, and this library has not observed it on a real account. After
-  the first apply, check that the instance has only the addresses you
-  listed. If Linode also assigns its own address, the next plan proposes a
-  replacement (see above).
-- **Whether the address stays reserved when the instance is destroyed.** The
-  provider's acceptance test `TestAccResourceInstance_deleteWithReservedIP`
-  asserts that it does. Protect the reservation itself with
-  `linode_reserved_ip_protected` regardless.
+So the configuration can drift from the server on these attributes, and
+that is intended: the configuration describes how to build a **new** server.
+Rotating keys on a running server is the configuration-management layer's
+job, against the host.
 
-The `instance_ip_address` output is the first element of `ipv4`. With one
-reserved address and no other IPv4, that is the reserved address.
+**Deliberately not ignored:**
+
+- `type` and `region`: a resize or migration, done in place by the provider.
+- `root_pass`: not `ForceNew`. The provider resets the password in place,
+  powering the instance off and on to do it, so a rotation still applies.
+- `disk_encryption`: `ForceNew`, but ignoring it would leave the
+  configuration claiming an encryption state the disk does not have. A
+  change fails the plan on `prevent_destroy` instead.
+- Everything else the base module exposes (labels, tags, backups, alerts,
+  placement group, and so on), which the provider updates in place.
+
+## Switching an existing instance to this module
+
+The resource address inside the module is `linode_instance.instance`, the
+same as the base module, so only the module address changes. Add a `moved`
+block in the consuming configuration:
+
+```hcl
+moved {
+  from = module.web.linode_instance.instance
+  to   = module.web_protected.linode_instance.instance
+}
+```
+
+For a module called with `for_each`, give the instance key on both sides
+(`module.web["a"].linode_instance.instance`). Confirm with `terraform plan`
+that the result is a move with **0 to destroy** before applying. A
+`user_data` that has already drifted from the server is ignored from that
+plan on.
+
+## Rebuilding on purpose
+
+`prevent_destroy` cannot be switched off from a variable, so a deliberate
+rebuild routes the instance back through the base module for one apply:
+
+1. Move it to a plain [`../linode_instance`](../linode_instance) call with
+   a `moved` block (`from` the protected address, `to` the plain one), or
+   `terraform state mv` the same two addresses.
+2. Run `terraform plan`. Every ignored attribute that has drifted shows up
+   again, with `# forces replacement`. Read it; this is the rebuild.
+3. Apply it, then move the instance back to this module the same way, and
+   confirm the plan is a move with 0 to destroy.
+
+These do **not** get around the guard, and are refused with
+`Error: Instance cannot be destroyed`:
+
+- `terraform apply -replace=module.web.linode_instance.instance`;
+- `terraform destroy`;
+- a `for_each` routing flag flipped on an instance that already exists (the
+  `allow_destroy` pattern: two module calls, one protected and one plain,
+  with a variable choosing which one gets each server). Flipping it plans a
+  destroy of the protected instance and fails. The flag is for a
+  configuration that must be destroyable from the start, such as a test
+  environment's teardown, chosen before the instance is created.
+
+**What does remove the guard: deleting the module call.** `prevent_destroy`
+lives in the configuration, so with the module call gone, Terraform plans
+the destroy and nothing refuses it. Read a plan that removes a protected
+server as carefully as a replacement.
+
+## Checking the guard
+
+The plan-only tests prove the ignored attributes keep their state value
+(`tests/protected.tftest.hcl`), but the mock provider does not model
+`ForceNew`, so they cannot reach a replacement or `prevent_destroy`. To see
+those work without touching an account, use the real provider against a
+hand-written state, with `-refresh=false` so it makes no API call:
+
+1. In a scratch directory, write a root module calling a copy of this module
+   (and of the base module, for comparison), and a `terraform.tfstate`
+   holding one `linode_instance` at `module.web.linode_instance.instance`
+   with the attributes the configuration sets.
+2. `terraform init`, then `terraform plan -refresh=false`, with
+   `LINODE_TOKEN` set to a placeholder.
+3. Change `user_data`, then the keys, `image`, `ipv4` and `firewall_id`, then
+   `type`; then plan `-destroy`, and with `-replace`.
+
+Success: the base module plans `must be replaced` for each create-time
+change; this module plans none of them, plans the `type` change in place,
+and fails the destroy, the replace, and a `disk_encryption` change with
+`Error: Instance cannot be destroyed`.
 
 <!-- BEGIN_TF_DOCS -->
 <!-- markdownlint-capture -->
