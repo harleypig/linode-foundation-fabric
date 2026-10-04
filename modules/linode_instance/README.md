@@ -3,6 +3,12 @@
 This module creates and manages one Linode instance, wrapping the
 `linode_instance` resource.
 
+It has no `lifecycle` guard. A change to a create-time attribute such as
+cloud-init `user_data` or `authorized_keys` replaces the instance, and a
+module call cannot add `prevent_destroy` or `ignore_changes`. For a server
+that must not be rebuilt by accident, use
+[`../linode_instance_protected`](../linode_instance_protected).
+
 ## Create-time reserved IPv4 (`ipv4`)
 
 `ipv4` passes the provider's `linode_instance.ipv4` argument through: "A set
