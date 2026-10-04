@@ -172,9 +172,9 @@ run "type_change_still_plans" {
   }
 }
 
-# Control for the second deliberately excluded group: root_pass is reset in
-# place by the provider (not ForceNew), so a rotation must reach the plan.
-run "root_pass_change_still_plans" {
+# root_pass is not ForceNew, but the provider applies a change with a power
+# cycle (shutdown, reset, boot), so it is ignored like the create-time keys.
+run "root_pass_change_plans_no_change" {
   command = plan
 
   variables {
@@ -182,7 +182,7 @@ run "root_pass_change_still_plans" {
   }
 
   assert {
-    condition     = nonsensitive(linode_instance.instance.root_pass == "a-rotated-placeholder-Passw0rd")
-    error_message = "root_pass is not ignored; a rotation must reach the plan"
+    condition     = nonsensitive(linode_instance.instance.root_pass == null)
+    error_message = "a root_pass set after creation must not reach the plan; it would power-cycle the server"
   }
 }

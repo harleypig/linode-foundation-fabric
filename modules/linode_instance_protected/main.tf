@@ -75,15 +75,21 @@ resource "linode_instance" "instance" {
     prevent_destroy = true
 
     # Read once, when the instance and its boot disk are created, and ForceNew
-    # in the provider (v4.7.0 schema_resource.go). A later change to any of
+    # in the provider (schema_resource.go, every release v4.0.0-v4.7.0). The
+    # provider never reads them back, ipv4 aside. A later change to any of
     # them is never applied to the running server -- the provider's only
     # response is to replace it -- so it is ignored here instead of letting
     # prevent_destroy fail the plan. A deliberate rebuild is in the README.
     #
-    # Left out on purpose: type and region (resized or migrated in place),
-    # root_pass (reset in place, not ForceNew), and disk_encryption (ForceNew,
-    # but ignoring it would leave config claiming an encryption state the disk
-    # does not have, so the plan is left to fail on prevent_destroy instead).
+    # root_pass is not ForceNew, but the provider applies a change by powering
+    # the server off, resetting the password and booting it again, so a drifted
+    # or regenerated value would take the server down on an ordinary apply. It
+    # is the initial password; rotating it is the host's job.
+    #
+    # Left out on purpose: type and region (resized or migrated in place), and
+    # disk_encryption (ForceNew, but ignoring it would leave config claiming an
+    # encryption state the disk does not have, so the plan is left to fail on
+    # prevent_destroy instead).
     ignore_changes = [
       metadata,         # cloud-init user_data: consumed at first boot only
       authorized_keys,  # written to root's authorized_keys at disk deploy
@@ -94,6 +100,7 @@ resource "linode_instance" "instance" {
       backup_id,        # the backup restored at creation
       ipv4,             # create-time address; later IPs are other resources
       firewall_id,      # create-time attachment; later via firewall devices
+      root_pass,        # see above: a change power-cycles the server
     ]
   }
 }
